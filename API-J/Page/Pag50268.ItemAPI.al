@@ -11,6 +11,7 @@ page 50268 ItemAPI
     PageType = API;
     SourceTable = Item;
     ODataKeyFields = SystemId;
+    SourceTableView = where(Blocked = const(false));
     
     layout
     {
