@@ -128,6 +128,15 @@ page 50168 "Purchase Requisitions"
                         // DimMgt.LookupDimValueCodeNoUpdate(2);
                     end;
                 }
+                field(ShortcutDimCode6; ShortcutDimCode[6])
+                {
+                    ApplicationArea = Dimensions;
+                    CaptionClass = '1,2,6';
+                    Caption = 'Shortcut Dimension 6 Code';
+                    Editable = false;
+                    TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(6),
+                                                                  Blocked = CONST(false));
+                }
                 field("Location Code"; Rec."Location Code")
                 {
                     ApplicationArea = All;
@@ -454,6 +463,11 @@ page 50168 "Purchase Requisitions"
         CurrPage.IncomingDocAttachFactBox.PAGE.LoadDataFromRecord(Rec);
     end;
 
+    trigger OnAfterGetRecord()
+    begin
+        DimMgt6.GetShortcutDimensions(Rec."Dimension Set ID", ShortcutDimCode);
+    end;
+
     trigger OnOpenPage()
     begin
         Rec.SetSecurityFilterOnRespCenter;
@@ -465,6 +479,8 @@ page 50168 "Purchase Requisitions"
         DocPrint: Codeunit "Document-Print";
         OpenApprovalEntriesExist: Boolean;
         CanCancelApprovalForRecord: Boolean;
+        ShortcutDimCode: array[8] of Code[20];
+        DimMgt6: Codeunit DimensionManagement;
 
     local procedure SetControlAppearance()
     var

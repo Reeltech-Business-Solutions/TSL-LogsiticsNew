@@ -131,6 +131,10 @@ table 50008 "Contract Line"
             FieldClass = FlowFilter;
 
         }
+        field(21; "Header Id"; Guid)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
     keys
     {

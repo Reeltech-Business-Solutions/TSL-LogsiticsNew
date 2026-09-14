@@ -10,7 +10,7 @@ page 50252 StaffAdvanceLines
     EntityName = 'line';
     EntitySetName = 'lines';
     ODataKeyFields = SystemId;
-    
+
 
 
 
@@ -23,7 +23,7 @@ page 50252 StaffAdvanceLines
             repeater(General)
             {
                 //field(id; Format(Rec.SystemId, 0, 4).ToLower()) { }
-                field(id; Rec.SystemId) { }
+                field(system_id; Rec.SystemId) { }
                 field("no"; Rec."No.")
                 {
                     ToolTip = 'Specifies the value of the No. field.';
@@ -66,7 +66,7 @@ page 50252 StaffAdvanceLines
                     ApplicationArea = All;
                 }
                 field(header_id; Rec."Header Id") { }
-            }   
+            }
         }
     }
     var

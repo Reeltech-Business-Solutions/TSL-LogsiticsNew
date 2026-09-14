@@ -140,7 +140,7 @@ tableextension 50018 PurchLine extends "Purchase Line"
     var
         purchase_header: Record "Purchase Header";
         purchase_line: Record "Purchase Line";
- 
+
 
 
     begin
@@ -153,31 +153,32 @@ tableextension 50018 PurchLine extends "Purchase Line"
 
 
         // end;
-       if purchase_header.Get(Rec."Document Type", Rec."Document No.") then begin
-
-          Rec."Shortcut Dimension 7 Code" := purchase_header."Shortcut Dimension 7 Code";
+        if purchase_header.Get(Rec."Document Type", Rec."Document No.") then begin
+            Rec."Header Id" := purchase_header.SystemId;
+            Rec."Shortcut Dimension 7 Code" := purchase_header."Shortcut Dimension 7 Code";
             Rec."Shortcut Dimension 6 Code" := purchase_header."Shortcut Dimension 6 Code";
             Rec."Shortcut Dimension 5 Code" := purchase_header."Shortcut Dimension 5 Code";
             Rec."Shortcut Dimension 4 Code" := purchase_header."Shortcut Dimension 4 Code";
             Rec."Shortcut Dimension 3 Code" := purchase_header."Shortcut Dimension 3 Code";
+            Rec."Buy-from Vendor No." := purchase_header."Buy-from Vendor No.";
         end;
     end;
 
-    trigger OnAfterInsert()
-    begin
-        ImprestHeader.Reset();
-        ImprestHeader.SetRange(ImprestHeader."No.", Rec."Document No.");
-        ImprestHeader.SetRange(ImprestHeader."Document Type", Rec."Document Type");
-        if ImprestHeader.FindFirst() then begin 
-            "Header Id" := ImprestHeader.SystemId;
-           // ImprestHeader.TestField("Shortcut Dimension 1 Code");
-            "Shortcut Dimension 1 Code" := ImprestHeader."Shortcut Dimension 1 Code";
-            "Shortcut Dimension 2 Code" := ImprestHeader."Shortcut Dimension 2 Code";
-            "Shortcut Dimension 3 Code" := ImprestHeader."Shortcut Dimension 3 Code";
-            "Shortcut Dimension 4 Code" := ImprestHeader."Shortcut Dimension 4 Code";
-            Modify();
-        end
-    end;
+    // trigger OnAfterInsert()
+    // begin
+    //     ImprestHeader.Reset();
+    //     ImprestHeader.SetRange(ImprestHeader."No.", Rec."Document No.");
+    //     ImprestHeader.SetRange(ImprestHeader."Document Type", Rec."Document Type");
+    //     if ImprestHeader.FindFirst() then begin
+    //         "Header Id" := ImprestHeader.SystemId;
+    //         // ImprestHeader.TestField("Shortcut Dimension 1 Code");
+    //         "Shortcut Dimension 1 Code" := ImprestHeader."Shortcut Dimension 1 Code";
+    //         "Shortcut Dimension 2 Code" := ImprestHeader."Shortcut Dimension 2 Code";
+    //         "Shortcut Dimension 3 Code" := ImprestHeader."Shortcut Dimension 3 Code";
+    //         "Shortcut Dimension 4 Code" := ImprestHeader."Shortcut Dimension 4 Code";
+    //         Modify();
+    //     end
+    // end;
 
     var
         DimMgt: Codeunit DimensionManagement;

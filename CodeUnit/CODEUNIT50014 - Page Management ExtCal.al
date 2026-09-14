@@ -32,27 +32,27 @@ codeunit 50014 "Page Management ExtCal"
                         VoucherHeader."Voucher Type"::BPV:
                             //begin
                             exit(PAGE::"Bank Payment Voucher");
-                        //end;
-                        VoucherHeader."Voucher Type"::BRV:
-                            // begin
-                            exit(PAGE::"Bank Receipt Voucher");
                         // end;
-                        VoucherHeader."Voucher Type"::CPV:
-                            //begin
-                            exit(PAGE::"Cash Payment Voucher");
+                        // VoucherHeader."Voucher Type"::BRV:
+                        //     // begin
+                        //     exit(PAGE::"Bank Receipt Voucher");
+                        // end;
+                        // VoucherHeader."Voucher Type"::CPV:
+                        //     //begin
+                        //     exit(PAGE::"Cash Payment Voucher");
                         //end;
-                        VoucherHeader."Voucher Type"::CRV:
-                            begin
-                                exit(PAGE::"Cash Receipt Voucher");
-                            end;
+                        // VoucherHeader."Voucher Type"::CRV:
+                        //     begin
+                        //         exit(PAGE::"Cash Receipt Voucher");
+                        //     end;
                         VoucherHeader."Voucher Type"::JV:
                             begin
                                 exit(PAGE::"Journal Voucher");
                             end;
-                        VoucherHeader."Voucher Type"::PettyCash:
-                            begin
-                                exit(PAGE::"Petty Cash Voucher");
-                            end;
+                    // VoucherHeader."Voucher Type"::PettyCash:
+                    //     begin
+                    //         exit(PAGE::"Petty Cash Voucher");
+                    //     end;
                     end;
                 end;
             DATABASE::"Payments Header":
@@ -143,14 +143,14 @@ codeunit 50014 "Page Management ExtCal"
         CASE VoucherHeader."Voucher Type" OF
             VoucherHeader."Voucher Type"::BPV:
                 EXIT(PAGE::"Bank Payment Voucher");
-            VoucherHeader."Voucher Type"::BRV:
-                EXIT(PAGE::"Bank Receipt Voucher");
-            VoucherHeader."Voucher Type"::CRV:
-                EXIT(PAGE::"Cash Receipt Voucher");
-            VoucherHeader."Voucher Type"::CPV:
-                EXIT(PAGE::"Cash Payment Voucher");
-            VoucherHeader."Voucher Type"::PettyCash:
-                EXIT(PAGE::"Petty Cash Voucher");
+            // VoucherHeader."Voucher Type"::BRV:
+            //     EXIT(PAGE::"Bank Receipt Voucher");
+            // VoucherHeader."Voucher Type"::CRV:
+            //     EXIT(PAGE::"Cash Receipt Voucher");
+            // VoucherHeader."Voucher Type"::CPV:
+            //     EXIT(PAGE::"Cash Payment Voucher");
+            // VoucherHeader."Voucher Type"::PettyCash:
+            //     EXIT(PAGE::"Petty Cash Voucher");
             VoucherHeader."Voucher Type"::JV:
                 EXIT(PAGE::"Journal Voucher");
         END;

@@ -42,6 +42,15 @@ page 50173 Requisitions
                 {
                     ApplicationArea = All;
                 }
+                field(ShortcutDimCode6; ShortcutDimCode[6])
+                {
+                    ApplicationArea = Dimensions;
+                    CaptionClass = '1,2,6';
+                    Caption = 'Shortcut Dimension 6 Code';
+                    Editable = false;
+                    TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(6),
+                                                                  Blocked = CONST(false));
+                }
                 field("Assigned User ID"; Rec."Assigned User ID")
                 {
                     ApplicationArea = All;
@@ -458,7 +467,14 @@ page 50173 Requisitions
             }
         }
     }
+    trigger OnAfterGetRecord()
+    begin
+        DimMgt6.GetShortcutDimensions(Rec."Dimension Set ID", ShortcutDimCode);
+    end;
+
     var
+        ShortcutDimCode: array[8] of Code[20];
+        DimMgt6: Codeunit DimensionManagement;
         PurchSetup: Record 312;
         CopyPurchDoc: Report 492;//39005487;
         ArchiveManagement: Codeunit 5063;

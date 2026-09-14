@@ -482,6 +482,19 @@ table 50065 "Staff Advanc Surrender Header"
                     Dim4 := DimVal.Name
             end;
         }
+        field(491; "Shortcut Dimension 6 Code"; Code[20])
+        {
+            CaptionClass = '1,2,6';
+            Caption = 'Shortcut Dimension 6 Code';
+            Description = 'Stores the reference of the sixth global dimension (Department) in the database';
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(6));
+
+            trigger OnValidate()
+            begin
+                ValidateShortcutDimCode(6, "Shortcut Dimension 6 Code");
+                UpdateSurrenderLinesDim6;
+            end;
+        }
         field(83; Dim3; Text[250])
         {
         }
@@ -811,6 +824,21 @@ table 50065 "Staff Advanc Surrender Header"
         DimMgt2: Codeunit DimensionManagement;
     begin
         DimMgt2.GetShortcutDimensions("Dimension Set ID", ShortcutDimCode);
+    end;
+
+    local procedure UpdateSurrenderLinesDim6()
+    var
+        SurrenderDetails: Record "Staff Advan Surrender Details";
+    begin
+        if "No." = '' then
+            exit;
+        SurrenderDetails.LockTable;
+        SurrenderDetails.SetRange("Surrender Doc No.", "No.");
+        if SurrenderDetails.FindSet then
+            repeat
+                SurrenderDetails.Validate("Shortcut Dimension 6 Code", "Shortcut Dimension 6 Code");
+                SurrenderDetails.Modify(true);
+            until SurrenderDetails.Next = 0;
     end;
 
     procedure GetNoSeriesRelCode(NoSeriesCode: Code[20]): Code[20]

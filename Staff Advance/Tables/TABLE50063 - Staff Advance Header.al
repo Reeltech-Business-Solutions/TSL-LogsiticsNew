@@ -229,6 +229,19 @@ table 50063 "Staff Advance Header"
                 //UpdateHeaderToLine;
             end;
         }
+        field(491; "Shortcut Dimension 6 Code"; Code[20])
+        {
+            CaptionClass = '1,2,6';
+            Caption = 'Shortcut Dimension 6 Code';
+            Description = 'Stores the reference of the sixth global dimension (Department) in the database';
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(6));
+
+            trigger OnValidate()
+            begin
+                ValidateShortcutDimCode(6, "Shortcut Dimension 6 Code");
+                UpdateLines(FIELDNO("Shortcut Dimension 6 Code"));
+            end;
+        }
         field(57; "Function Name"; Text[50])
         {
             Description = 'Stores the name of the function in the database';
@@ -772,6 +785,8 @@ table 50063 "Staff Advance Header"
                         StaffAdvLines.VALIDATE("Shortcut Dimension 3 Code", "Shortcut Dimension 3 Code");
                     FIELDNO("Shortcut Dimension 4 Code"):
                         StaffAdvLines.VALIDATE("Shortcut Dimension 4 Code", "Shortcut Dimension 4 Code");
+                    FIELDNO("Shortcut Dimension 6 Code"):
+                        StaffAdvLines.VALIDATE("Shortcut Dimension 6 Code", "Shortcut Dimension 6 Code");
                     FIELDNO("Currency Code"):
                         StaffAdvLines.VALIDATE("Currency Code", "Currency Code");
                     FIELDNO("Currency Factor"):

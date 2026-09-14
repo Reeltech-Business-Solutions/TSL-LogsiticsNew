@@ -186,40 +186,40 @@ pageextension 50001 ExtendNavigationArea extends "Accounting Manager Role Center
                         RunObject = page "Bank Payment List";
                         ApplicationArea = All;
                     }
-                    action("Bank Receipt")
-                    {
-                        RunObject = page "Bank Receipt  List";
-                        ApplicationArea = All;
-                    }
+                    // action("Bank Receipt")
+                    // {
+                    //     RunObject = page "Bank Receipt  List";
+                    //     ApplicationArea = All;
+                    // }
                     separator(m)
                     {
 
                     }
-                    action("Cash Receipt")
-                    {
-                        RunObject = page "Cash Receipt  List";
-                        ApplicationArea = All;
-                    }
-                    action("Cash Payment")
-                    {
-                        RunObject = page "Cash Payment List";
-                        ApplicationArea = All;
-                    }
+                    // action("Cash Receipt")
+                    // {
+                    //     RunObject = page "Cash Receipt  List";
+                    //     ApplicationArea = All;
+                    // }
+                    // action("Cash Payment")
+                    // {
+                    //     RunObject = page "Cash Payment List";
+                    //     ApplicationArea = All;
+                    // }
 
-                    action("Petty Cash")
-                    {
-                        RunObject = page "Petty Cash List";
-                        ApplicationArea = All;
-                    }
+                    // action("Petty Cash")
+                    // {
+                    //     RunObject = page "Petty Cash List";
+                    //     ApplicationArea = All;
+                    // }
                     separator(b)
                     {
 
                     }
-                    action("Journal Voucher")
-                    {
-                        RunObject = page "Journal Voucher List";
-                        ApplicationArea = All;
-                    }
+                    // action("Journal Voucher")
+                    // {
+                    //     RunObject = page "Journal Voucher List";
+                    //     ApplicationArea = All;
+                    // }
                     action("Scrap Sales")
                     {
                         RunObject = page "Scrap Sales List";
@@ -285,8 +285,8 @@ pageextension 50001 ExtendNavigationArea extends "Accounting Manager Role Center
                     RunObject = Page "Employee Loan";
 
                 }
-                
-               
+
+
                 // action("Payment List")
                 // {
                 //     RunObject = page "Payment List";

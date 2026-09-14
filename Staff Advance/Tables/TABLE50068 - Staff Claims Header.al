@@ -352,6 +352,19 @@ table 50068 "Staff Claims Header"
                 //UpdateHeaderToLine;
             end;
         }
+        field(491; "Shortcut Dimension 6 Code"; Code[20])
+        {
+            CaptionClass = '1,2,6';
+            Caption = 'Shortcut Dimension 6 Code';
+            Description = 'Stores the reference of the sixth global dimension (Department) in the database';
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(6));
+
+            trigger OnValidate()
+            begin
+                ValidateShortcutDimCode(6, "Shortcut Dimension 6 Code");
+                UpdateClaimLinesDim6;
+            end;
+        }
         field(83; Dim3; Text[250])
         {
         }
@@ -705,6 +718,21 @@ table 50068 "Staff Claims Header"
     procedure ShowShortcutDimCode(var ShortcutDimCode: array[8] of Code[20])
     begin
         DimMgt.GetShortcutDimensions("Dimension Set ID", ShortcutDimCode);
+    end;
+
+    local procedure UpdateClaimLinesDim6()
+    var
+        STClaimLines: Record "Staff Claim Lines";
+    begin
+        if "No." = '' then
+            exit;
+        STClaimLines.LockTable;
+        STClaimLines.SetRange(No, "No.");
+        if STClaimLines.FindSet then
+            repeat
+                STClaimLines.Validate("Shortcut Dimension 6 Code", "Shortcut Dimension 6 Code");
+                STClaimLines.Modify(true);
+            until STClaimLines.Next = 0;
     end;
 
     procedure GetNoSeriesRelCode(NoSeriesCode: Code[20]): Code[20]

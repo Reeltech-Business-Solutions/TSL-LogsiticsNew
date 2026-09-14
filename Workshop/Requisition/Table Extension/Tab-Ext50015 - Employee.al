@@ -56,7 +56,7 @@ tableextension 50015 EmployeeExt extends Employee
         }
         field(50009; "Employee No."; Code[20])
         {
-            
+
         }
         field(50010; "Marital Status"; Code[20])
         {
@@ -96,25 +96,25 @@ pageextension 50144 EmployeeExt extends "Employee Card" //MyTargetPageId
             {
                 ApplicationArea = All;
             }
-            field("Employee No.";Rec."Employee No.")
+            field("Employee No."; Rec."Employee No.")
             {
-
+                ApplicationArea = All;
             }
-            field("Marital Status";Rec."Marital Status")
+            field("Marital Status"; Rec."Marital Status")
             {
-
+                ApplicationArea = All;
             }
-            field("Employment Type";Rec."Employment Type")
+            field("Employment Type"; Rec."Employment Type")
             {
-
+                ApplicationArea = All;
             }
-            field("Employment Status";Rec."Employment Status")
+            field("Employment Status"; Rec."Employment Status")
             {
-
+                ApplicationArea = All;
             }
-            field("Date of Joining";Rec."Date of Joining")
+            field("Date of Joining"; Rec."Date of Joining")
             {
-
+                ApplicationArea = All;
             }
 
         }

@@ -24,7 +24,7 @@ page 50251 StaffAdvAPI
                 {
                     ApplicationArea = All;
                 }
-                
+
                 field(no; Rec."No.")
                 {
                     Caption = 'No.';
@@ -35,7 +35,7 @@ page 50251 StaffAdvAPI
                     Caption = 'Date';
                     ApplicationArea = All;
                 }
-               
+
 
                 field(department_name; Rec."Function Name")
                 {
@@ -64,7 +64,7 @@ page 50251 StaffAdvAPI
                             Error('No employee found with email %1', Rec."employee email");
                     end;
                 }
-                 field(department_code; Rec."Shortcut Dimension 1 Code")
+                field(department_code; Rec."Shortcut Dimension 1 Code")
                 {
 
                     ApplicationArea = All;
@@ -80,7 +80,7 @@ page 50251 StaffAdvAPI
                     Caption = 'Payee';
                     ApplicationArea = All;
                 }
-                field(area_code; Rec."Shortcut Dimension 3 Code")
+                field(truck_code; Rec."Shortcut Dimension 3 Code")
                 {
 
                     ApplicationArea = All;
@@ -117,11 +117,7 @@ page 50251 StaffAdvAPI
                     Caption = 'Cheque No.';
                     ApplicationArea = All;
                 }
-                field(system_id; Rec.SystemId)
-                {
-                    Caption = 'SystemId';
-                    ApplicationArea = All;
-                }
+
 
 
                 part(lines; StaffAdvanceLines)

@@ -189,8 +189,7 @@ table 50057 "Payments Header"
         }
         field(35; Status; Enum Status)
         {
-            Description = 'Stores the status of the record in the database';
-            //OptionCaption = 'Open,,,,Posted,Cancelled,,,Pending Approval,Approved';
+            Description = 'Stores the status of the record in the database';           //OptionCaption = 'Open,,,,Posted,Cancelled,,,Pending Approval,Approved';
             //OptionMembers = Open,"1st Approval","2nd Approval","Cheque Printing",Posted,Cancelled,Checking,VoteBook,"Pending Approval",Approved;
         }
         field(38; "Payment Type"; Option)

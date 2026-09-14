@@ -92,6 +92,10 @@ page 50080 "Staff Claim Lines"
                     ApplicationArea = All;
 
                 }
+                field("Shortcut Dimension 6 Code"; Rec."Shortcut Dimension 6 Code")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }

@@ -63,12 +63,13 @@ page 50079 "Staff Claim"
                 {
                     Editable = DimEditable;
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Budget Center Name"; Rec."Budget Center Name")
                 {
                     Caption = 'Revenue Centre';
                     Editable = false;
-                    Visible = true;
+                    Visible = false;
                     ApplicationArea = All;
                 }
                 field("Shortcut Dimension 3 Code"; Rec."Shortcut Dimension 3 Code")
@@ -79,6 +80,11 @@ page 50079 "Staff Claim"
                 field("ECU Code Description"; Rec."ECU Code Description")
                 {
                     Visible = false;
+                    ApplicationArea = All;
+                }
+                field("Shortcut Dimension 6 Code"; Rec."Shortcut Dimension 6 Code")
+                {
+                    Editable = DimEditable;
                     ApplicationArea = All;
                 }
 
@@ -127,7 +133,7 @@ page 50079 "Staff Claim"
                 }
                 field(Status; Rec.Status)
                 {
-                  //  Editable = false;
+                    Editable = false;
                     ApplicationArea = All;
                 }
                 field("Total Net Amount"; Rec."Total Net Amount")
@@ -509,6 +515,8 @@ page 50079 "Staff Claim"
                             PVHeadEr.Validate("Shortcut Dimension 3 Code");
                             PVHeadEr."Shortcut Dimension 4 Code" := Rec."Shortcut Dimension 4 Code";
                             PVHeadEr.Validate("Shortcut Dimension 4 Code");
+                            PVHeadEr."Shortcut Dimension 6 Code" := Rec."Shortcut Dimension 6 Code";
+                            PVHeadEr.Validate("Shortcut Dimension 6 Code");
                             PVHeadEr.Narration := Rec.Purpose;
                             PVHeadEr."External Document No." := Rec."No.";
                             PVHeadEr.Insert(true);
@@ -542,6 +550,8 @@ page 50079 "Staff Claim"
                                     PaymentLines.Validate("Shortcut Dimension 3 Code");
                                     PaymentLines."Shortcut Dimension 4 Code" := STClaimLines."Shortcut Dimension 4 Code";
                                     PaymentLines.Validate("Shortcut Dimension 4 Code");
+                                    PaymentLines."Shortcut Dimension 6 Code" := STClaimLines."Shortcut Dimension 6 Code";
+                                    PaymentLines.Validate("Shortcut Dimension 6 Code");
                                     PaymentLines.Insert(true);
 
                                 until STClaimLines.Next = 0;
@@ -715,6 +725,7 @@ page 50079 "Staff Claim"
         GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 2 Code");
         GenJnlLine.ValidateShortcutDimCode(3, Rec."Shortcut Dimension 3 Code");
         GenJnlLine.ValidateShortcutDimCode(4, Rec."Shortcut Dimension 4 Code");
+        GenJnlLine.ValidateShortcutDimCode(6, Rec."Shortcut Dimension 6 Code");
 
         if GenJnlLine.Amount <> 0 then
             GenJnlLine.Insert;
@@ -753,6 +764,7 @@ page 50079 "Staff Claim"
                 GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 2 Code");
                 GenJnlLine.ValidateShortcutDimCode(3, PayLine."Shortcut Dimension 3 Code");
                 GenJnlLine.ValidateShortcutDimCode(4, PayLine."Shortcut Dimension 4 Code");
+                GenJnlLine.ValidateShortcutDimCode(6, PayLine."Shortcut Dimension 6 Code");
 
                 if GenJnlLine.Amount <> 0 then
                     GenJnlLine.Insert;

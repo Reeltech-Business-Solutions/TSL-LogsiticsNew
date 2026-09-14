@@ -65,12 +65,17 @@ page 50064 "Staff Advance Request"
                 field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
                 {
                     ApplicationArea = all;
+                    Visible = false;
                 }
                 field("Shortcut Dimension 3 Code"; Rec."Shortcut Dimension 3 Code")
                 {
                     ApplicationArea = all;
                 }
                 field("Shortcut Dimension 4 Code"; Rec."Shortcut Dimension 4 Code")
+                {
+                    ApplicationArea = all;
+                }
+                field("Shortcut Dimension 6 Code"; Rec."Shortcut Dimension 6 Code")
                 {
                     ApplicationArea = all;
                 }
@@ -122,7 +127,7 @@ page 50064 "Staff Advance Request"
                 }
                 field(Status; Rec.Status)
                 {
-                    //  Editable = false;
+                    Editable = false;
                     ApplicationArea = all;
                     trigger OnValidate()
                     begin
@@ -495,6 +500,8 @@ page 50064 "Staff Advance Request"
                             PVHeadEr.Validate("Shortcut Dimension 3 Code");
                             PVHeadEr."Shortcut Dimension 4 Code" := Rec."Shortcut Dimension 4 Code";
                             PVHeadEr.Validate("Shortcut Dimension 4 Code");
+                            PVHeadEr."Shortcut Dimension 6 Code" := Rec."Shortcut Dimension 6 Code";
+                            PVHeadEr.Validate("Shortcut Dimension 6 Code");
 
                             PVHeadEr."Narration" := Rec.Purpose;
                             PVHeadEr."External Document No." := Rec."No.";
@@ -533,6 +540,8 @@ page 50064 "Staff Advance Request"
                                     PaymentLines.Validate("Shortcut Dimension 3 Code");
                                     PaymentLines."Shortcut Dimension 4 Code" := StaffAdvLines."Shortcut Dimension 4 Code";
                                     PaymentLines.Validate("Shortcut Dimension 4 Code");
+                                    PaymentLines."Shortcut Dimension 6 Code" := StaffAdvLines."Shortcut Dimension 6 Code";
+                                    PaymentLines.Validate("Shortcut Dimension 6 Code");
                                     PaymentLines.Insert(true);
                                 until StaffAdvLines.Next = 0;
                             end;
@@ -835,6 +844,7 @@ page 50064 "Staff Advance Request"
         GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 2 Code");
         GenJnlLine.ValidateShortcutDimCode(3, Rec."Shortcut Dimension 3 Code");
         GenJnlLine.ValidateShortcutDimCode(4, Rec."Shortcut Dimension 4 Code");
+        GenJnlLine.ValidateShortcutDimCode(6, Rec."Shortcut Dimension 6 Code");
 
         if GenJnlLine.Amount <> 0 then
             GenJnlLine.Insert;

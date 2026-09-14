@@ -57,6 +57,7 @@ table 50069 "Staff Claim Lines"
                     "Shortcut Dimension 2 Code" := ImprestHeader."Shortcut Dimension 2 Code";
                     "Shortcut Dimension 3 Code" := ImprestHeader."Shortcut Dimension 3 Code";
                     "Shortcut Dimension 4 Code" := ImprestHeader."Shortcut Dimension 4 Code";
+                    "Shortcut Dimension 6 Code" := ImprestHeader."Shortcut Dimension 6 Code";
                     "Currency Factor" := ImprestHeader."Currency Factor";
                     "Currency Code" := ImprestHeader."Currency Code";
                     if Purpose = '' then
@@ -177,6 +178,18 @@ table 50069 "Staff Claim Lines"
             Description = 'Stores the reference of the fourth global dimension in the database';
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(4));
         }
+        field(491; "Shortcut Dimension 6 Code"; Code[20])
+        {
+            CaptionClass = '1,2,6';
+            Caption = 'Shortcut Dimension 6 Code';
+            Description = 'Stores the reference of the sixth global dimension (Department) in the database';
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(6));
+
+            trigger OnValidate()
+            begin
+                ValidateShortcutDimCode(6, "Shortcut Dimension 6 Code");
+            end;
+        }
         field(83; Committed; Boolean)
         {
         }
@@ -271,7 +284,7 @@ table 50069 "Staff Claim Lines"
             CalcFormula = Lookup("Staff Claims Header"."Responsibility Center" WHERE("No." = FIELD(No)));
             FieldClass = FlowField;
         }
-         field(483; "Requested Amount"; Decimal)
+        field(483; "Requested Amount"; Decimal)
         {
             Editable = false;
         }
@@ -279,7 +292,7 @@ table 50069 "Staff Claim Lines"
         {
             TableRelation = "Staff Claims Header".SystemId;
 
-            
+
         }
     }
 
@@ -328,6 +341,7 @@ table 50069 "Staff Claim Lines"
             "Shortcut Dimension 2 Code" := ImprestHeader."Shortcut Dimension 2 Code";
             "Shortcut Dimension 3 Code" := ImprestHeader."Shortcut Dimension 3 Code";
             "Shortcut Dimension 4 Code" := ImprestHeader."Shortcut Dimension 4 Code";
+            "Shortcut Dimension 6 Code" := ImprestHeader."Shortcut Dimension 6 Code";
             "Currency Factor" := ImprestHeader."Currency Factor";
             "Currency Code" := ImprestHeader."Currency Code";
             if Purpose = '' then
@@ -351,6 +365,7 @@ table 50069 "Staff Claim Lines"
             "Shortcut Dimension 2 Code" := ImprestHeader."Shortcut Dimension 2 Code";
             "Shortcut Dimension 3 Code" := ImprestHeader."Shortcut Dimension 3 Code";
             "Shortcut Dimension 4 Code" := ImprestHeader."Shortcut Dimension 4 Code";
+            "Shortcut Dimension 6 Code" := ImprestHeader."Shortcut Dimension 6 Code";
             "Currency Factor" := ImprestHeader."Currency Factor";
             "Currency Code" := ImprestHeader."Currency Code";
             if Purpose = '' then

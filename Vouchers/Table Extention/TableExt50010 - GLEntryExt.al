@@ -31,6 +31,8 @@ pageextension 50002 GLEntryExt extends "General Ledger Entries"
             field("Loan ID"; Rec."Loan ID") { ApplicationArea = All; }
             field("Acct. No."; Rec."Acct. No.") { ApplicationArea = All; }
             field("Job No.1"; Rec."Job No.") { ApplicationArea = All; }
+            field("Source_No."; Rec."Source No.") { ApplicationArea = All; }
+            field("Source_Type"; Rec."Source Type") { ApplicationArea = All; }
         }
 
     }

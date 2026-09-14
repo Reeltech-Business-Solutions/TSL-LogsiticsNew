@@ -412,36 +412,36 @@ page 50233 "Internal Control RoleCenter"
                     RunObject = page "Issue Voucher List";
                     ApplicationArea = All;
                 }
-                action("Journal Voucher")
-                {
-                    RunObject = page "Journal Voucher List";
-                    ApplicationArea = All;
-                }
-                action("Cash Payment Voucher")
-                {
-                    RunObject = page "Cash Payment List";
-                    ApplicationArea = All;
-                }
-                action("Cash Receipt Voucher")
-                {
-                    RunObject = page "Cash Receipt  List";
-                    ApplicationArea = All;
-                }
+                // action("Journal Voucher")
+                // {
+                //     RunObject = page "Journal Voucher List";
+                //     ApplicationArea = All;
+                // }
+                // action("Cash Payment Voucher")
+                // {
+                //     RunObject = page "Cash Payment List";
+                //     ApplicationArea = All;
+                // }
+                // action("Cash Receipt Voucher")
+                // {
+                //     RunObject = page "Cash Receipt  List";
+                //     ApplicationArea = All;
+                // }
                 action("Bank Payment Voucher")
                 {
                     RunObject = page "Bank Payment List";
                     ApplicationArea = All;
                 }
-                action("Bank Receipt Voucher")
-                {
-                    RunObject = page "Bank Receipt  List";
-                    ApplicationArea = All;
-                }
-                action("Petty Cash Voucher")
-                {
-                    RunObject = page "Petty Cash List";
-                    ApplicationArea = All;
-                }
+                // action("Bank Receipt Voucher")
+                // {
+                //     RunObject = page "Bank Receipt  List";
+                //     ApplicationArea = All;
+                // }
+                // action("Petty Cash Voucher")
+                // {
+                //     RunObject = page "Petty Cash List";
+                //     ApplicationArea = All;
+                // }
             }
             group("Posted Vouchers")
             {

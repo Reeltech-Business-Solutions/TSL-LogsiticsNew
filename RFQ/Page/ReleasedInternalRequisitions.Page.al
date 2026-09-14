@@ -43,6 +43,15 @@ page 50172 "Released Internal Requisitions"
                 {
                     ApplicationArea = All;
                 }
+                field(ShortcutDimCode6; ShortcutDimCode[6])
+                {
+                    ApplicationArea = Dimensions;
+                    CaptionClass = '1,2,6';
+                    Caption = 'Shortcut Dimension 6 Code';
+                    Editable = false;
+                    TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(6),
+                                                                  Blocked = CONST(false));
+                }
                 field("Posting Description"; Rec."Posting Description")
                 {
                     ApplicationArea = All;
@@ -504,6 +513,7 @@ page 50172 "Released Internal Requisitions"
     trigger OnAfterGetRecord()
     begin
         CurrPageUpdate;
+        DimMgt6.GetShortcutDimensions(Rec."Dimension Set ID", ShortcutDimCode);
     end;
 
     trigger OnDeleteRecord(): Boolean
@@ -547,6 +557,8 @@ page 50172 "Released Internal Requisitions"
         //DeleteCommitment: Record 39005882;
         PurchLine: Record 39;
         StatusEditable: Boolean;
+        ShortcutDimCode: array[8] of Code[20];
+        DimMgt6: Codeunit DimensionManagement;
 
     local procedure ApproveCalcInvDisc()
     begin

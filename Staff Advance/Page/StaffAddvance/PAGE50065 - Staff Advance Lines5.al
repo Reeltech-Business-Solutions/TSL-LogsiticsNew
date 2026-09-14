@@ -121,6 +121,10 @@ page 50065 "Staff Advance Lines"
                     ApplicationArea = all;
                     Visible = false;
                 }
+                field("Shortcut Dimension 6 Code"; Rec."Shortcut Dimension 6 Code")
+                {
+                    ApplicationArea = all;
+                }
             }
         }
     }

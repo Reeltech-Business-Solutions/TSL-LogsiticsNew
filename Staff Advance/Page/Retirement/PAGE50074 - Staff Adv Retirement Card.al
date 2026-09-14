@@ -114,6 +114,7 @@ page 50074 "Staff Advance Retirement"
                     Editable = DimEditable;
                     //Visible = true;
                     ApplicationArea = All;
+                    Visible = false;
 
                     trigger OnValidate()
                     var
@@ -128,12 +129,17 @@ page 50074 "Staff Advance Retirement"
                 {
                     Caption = 'Revenue Centre';
                     Editable = true;
-                    //Visible = false;
+                    Visible = false;
                     ApplicationArea = All;
                 }
                 field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     Visible = false;
+                    ApplicationArea = All;
+                }
+                field("Shortcut Dimension 6 Code"; Rec."Shortcut Dimension 6 Code")
+                {
+                    Editable = DimEditable;
                     ApplicationArea = All;
                 }
                 field("User ID"; Rec."User ID")
@@ -540,6 +546,7 @@ page 50074 "Staff Advance Retirement"
                                 GenJnlLine.VALIDATE(GenJnlLine."Shortcut Dimension 2 Code");
                                 GenJnlLine.ValidateShortcutDimCode(3, ImprestDetails."Shortcut Dimension 3 Code");
                                 GenJnlLine.ValidateShortcutDimCode(4, ImprestDetails."Shortcut Dimension 4 Code");
+                                GenJnlLine.ValidateShortcutDimCode(6, ImprestDetails."Shortcut Dimension 6 Code");
 
                                 //Application of Surrender entries
                                 IF GenJnlLine."Bal. Account Type" = GenJnlLine."Bal. Account Type"::Employee THEN BEGIN
@@ -603,6 +610,7 @@ page 50074 "Staff Advance Retirement"
                                 GenJnlLine.VALIDATE(GenJnlLine."Shortcut Dimension 2 Code");
                                 GenJnlLine.ValidateShortcutDimCode(3, ImprestDetails."Shortcut Dimension 3 Code");
                                 GenJnlLine.ValidateShortcutDimCode(4, ImprestDetails."Shortcut Dimension 4 Code");
+                                GenJnlLine.ValidateShortcutDimCode(6, ImprestDetails."Shortcut Dimension 6 Code");
 
                                 //Application of Surrender entries
                                 IF GenJnlLine."Account Type" = GenJnlLine."Account Type"::Employee THEN BEGIN
@@ -666,6 +674,7 @@ page 50074 "Staff Advance Retirement"
                                     GenJnlLine.VALIDATE(GenJnlLine."Shortcut Dimension 2 Code");
                                     GenJnlLine.ValidateShortcutDimCode(3, ImprestDetails."Shortcut Dimension 3 Code");
                                     GenJnlLine.ValidateShortcutDimCode(4, ImprestDetails."Shortcut Dimension 4 Code");
+                                    GenJnlLine.ValidateShortcutDimCode(6, ImprestDetails."Shortcut Dimension 6 Code");
 
                                     //Application of Surrender entries
                                     IF GenJnlLine."Account Type" = GenJnlLine."Account Type"::Employee THEN BEGIN
@@ -737,6 +746,7 @@ page 50074 "Staff Advance Retirement"
                                 GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 2 Code");
                                 GenJnlLine.ValidateShortcutDimCode(3, Rec."Shortcut Dimension 3 Code");
                                 GenJnlLine.ValidateShortcutDimCode(4, Rec."Shortcut Dimension 4 Code");
+                                GenJnlLine.ValidateShortcutDimCode(6, Rec."Shortcut Dimension 6 Code");
                                 GenJnlLine."External Document No." := ImprestDetails."Cash Receipt No";
 
                                 // if GenJnlLine.Amount <> 0 then
@@ -1376,6 +1386,7 @@ page 50074 "Staff Advance Retirement"
         GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 2 Code");
         GenJnlLine.ValidateShortcutDimCode(3, Rec."Shortcut Dimension 3 Code");
         GenJnlLine.ValidateShortcutDimCode(4, Rec."Shortcut Dimension 4 Code");
+        GenJnlLine.ValidateShortcutDimCode(6, Rec."Shortcut Dimension 6 Code");
 
         //Application of Surrender entries
         if GenJnlLine."Account Type" = GenJnlLine."Account Type"::Employee then begin
@@ -1442,6 +1453,7 @@ page 50074 "Staff Advance Retirement"
         GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 2 Code");
         GenJnlLine.ValidateShortcutDimCode(3, Rec."Shortcut Dimension 3 Code");
         GenJnlLine.ValidateShortcutDimCode(4, Rec."Shortcut Dimension 4 Code");
+        GenJnlLine.ValidateShortcutDimCode(6, Rec."Shortcut Dimension 6 Code");
         GenJnlLine."External Document No." := ImprestDetails."Cash Receipt No";
         /*
         //Application of Surrender entries

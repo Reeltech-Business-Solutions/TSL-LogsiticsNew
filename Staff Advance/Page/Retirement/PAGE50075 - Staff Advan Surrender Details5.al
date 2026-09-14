@@ -172,6 +172,10 @@ page 50075 "Staff Advan Surrender Details5"
                     Visible = true;
                     ApplicationArea = All;
                 }
+                field("Shortcut Dimension 6 Code"; Rec."Shortcut Dimension 6 Code")
+                {
+                    ApplicationArea = All;
+                }
                 field("Advance Holder"; Rec."Advance Holder")
                 {
                     ApplicationArea = All;

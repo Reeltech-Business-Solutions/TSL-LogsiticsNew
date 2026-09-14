@@ -10,8 +10,8 @@ page 50263 "Requisition API"
     EntitySetName = 'requisitions';
     PageType = API;
     SourceTable = "Purchase Header";
-    SourceTableView = where("Document Type" = const(Quote), "Purchase Type" = filter("Local Requisition"), Status = filter(Open));
-    
+    SourceTableView = where("Document Type" = const(Quote), "Purchase Type" = filter("Local Requisition"));
+
     layout
     {
         area(Content)
@@ -26,7 +26,7 @@ page 50263 "Requisition API"
                 {
 
                 }
-                field(description;Rec.Description)
+                field(description; Rec.Description)
                 {
 
                 }
@@ -38,19 +38,20 @@ page 50263 "Requisition API"
                 {
 
                 }
+
                 field(trucks_code; Rec."Shortcut Dimension 3 Code")
                 {
-                    
+
                 }
                 field(trip_type_code; Rec."Shortcut Dimension 4 Code")
                 {
-                   
+
                 }
                 field(status; Rec.Status)
                 {
-                   
+
                 }
-                 part(lines; RequisitionLines)
+                part(lines; RequisitionLines)
                 {
 
                     EntityName = 'line';
@@ -58,7 +59,7 @@ page 50263 "Requisition API"
                     //   SubPageLink = "No." = field("No.");
                     SubPageLink = "Header Id" = field(SystemId);
                 }
-                
+
             }
         }
     }

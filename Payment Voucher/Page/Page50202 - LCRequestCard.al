@@ -228,7 +228,7 @@ page 50202 "LC Request Card"
                 field(Status; rec.Status)
                 {
                     ApplicationArea = All;
-                    Editable = false;
+                    //Editable = false;
                 }
                 field("Total Payment Amount"; rec."Total Payment Amount")
                 {

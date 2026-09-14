@@ -49,6 +49,19 @@ page 50162 "Internal Requisitions"  //page 39005882
                 {
                     ApplicationArea = All;
                 }
+                field(ShortcutDimCode6; ShortcutDimCode[6])
+                {
+                    ApplicationArea = Dimensions;
+                    CaptionClass = '1,2,6';
+                    Caption = 'Shortcut Dimension 6 Code';
+                    TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(6),
+                                                                  Blocked = CONST(false));
+
+                    trigger OnValidate()
+                    begin
+                        ValidateShortcutDimCode6(ShortcutDimCode[6]);
+                    end;
+                }
                 field("Posting Description"; Rec."Posting Description")
                 {
                     ApplicationArea = All;
@@ -547,12 +560,18 @@ page 50162 "Internal Requisitions"  //page 39005882
         Rec."Purchase Type" := "Purchase Type"::"Local Requisition";
         Rec."Buy-from Vendor No." := 'INT001';
         Rec.Validate("Buy-from Vendor No.");
+        Clear(ShortcutDimCode);
     end;
 
     trigger OnAfterGetCurrRecord()
     begin
         SetControlAppearance;
         CurrPage.IncomingDocAttachFactBox.PAGE.LoadDataFromRecord(Rec);
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        DimMgt6.GetShortcutDimensions(Rec."Dimension Set ID", ShortcutDimCode);
     end;
 
     trigger OnOpenPage()
@@ -566,6 +585,14 @@ page 50162 "Internal Requisitions"  //page 39005882
         DocPrint: Codeunit "Document-Print";
         OpenApprovalEntriesExist: Boolean;
         CanCancelApprovalForRecord: Boolean;
+        ShortcutDimCode: array[8] of Code[20];
+        DimMgt6: Codeunit DimensionManagement;
+
+    local procedure ValidateShortcutDimCode6(var NewShortcutDimCode: Code[20])
+    begin
+        DimMgt6.ValidateShortcutDimValues(6, NewShortcutDimCode, Rec."Dimension Set ID");
+        CurrPage.SaveRecord;
+    end;
 
     local procedure SetControlAppearance()
     var

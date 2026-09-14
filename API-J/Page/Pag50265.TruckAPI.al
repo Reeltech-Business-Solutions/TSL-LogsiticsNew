@@ -6,12 +6,12 @@ page 50265 TruckAPI
     ApplicationArea = All;
     Caption = 'truckAPI';
     DelayedInsert = true;
-    EntityName = 'truck';
+    EntityName = 'truckyyy';
     EntitySetName = 'trucks';
     PageType = API;
     SourceTable = "Dimension Value";
     SourceTableView = where("Global Dimension No." = const(3));
-    
+
     layout
     {
         area(Content)
@@ -22,11 +22,11 @@ page 50265 TruckAPI
                 {
 
                 }
-                field(code;Rec.Code)
+                field(code; Rec.Code)
                 {
-                   
+
                 }
-                field(name;Rec.Name)
+                field(name; Rec.Name)
                 {
 
                 }

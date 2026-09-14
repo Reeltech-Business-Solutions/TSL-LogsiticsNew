@@ -40,6 +40,7 @@ table 50066 "Staff Advan Surrender Details"
                         "Advance Holder" := Pay."Account No.";
                         "Shortcut Dimension 1 Code" := Pay."Global Dimension 1 Code";
                         "Shortcut Dimension 2 Code" := Pay."Shortcut Dimension 2 Code";
+                        "Shortcut Dimension 6 Code" := Pay."Shortcut Dimension 6 Code";
                         "Currency Factor" := Pay."Currency Factor";
                         "Currency Code" := Pay."Currency Code";
                     end //else
@@ -178,8 +179,14 @@ table 50066 "Staff Advan Surrender Details"
         }
         field(24; "Shortcut Dimension 6 Code"; Code[20])
         {
+            CaptionClass = '1,2,6';
             Caption = 'Shortcut Dimension 6 Code';
-            TableRelation = Dimension;
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(6));
+
+            trigger OnValidate()
+            begin
+                ValidateShortcutDimCode(6, "Shortcut Dimension 6 Code");
+            end;
         }
         field(25; "Shortcut Dimension 7 Code"; Code[20])
         {

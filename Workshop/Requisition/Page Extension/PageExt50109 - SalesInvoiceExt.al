@@ -4,6 +4,10 @@ pageextension 50109 "Sales Invoice Ext" extends "Sales Invoice"
     {
         addafter("Posting Date")
         {
+            field("Posting_Description"; Rec."Posting Description")
+            {
+                ApplicationArea = All;
+            }
             field("Start Date"; Rec."Start Date")
             {
                 Caption = 'Start Date';
