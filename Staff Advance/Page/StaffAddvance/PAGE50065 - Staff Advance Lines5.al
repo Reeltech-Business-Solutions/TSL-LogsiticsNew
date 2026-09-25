@@ -10,22 +10,23 @@ page 50065 "Staff Advance Lines"
         {
             repeater(Control1000000000)
             {
-                Editable = Editno;
+                // Editable = Editno;
                 ShowCaption = false;
                 field("Advance Type"; Rec."Advance Type")
                 {
                     ApplicationArea = all;
+                    Editable = locklines;
 
                 }
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
-                    Editable = false;
+                    Editable = locklines;
                     Visible = false;
                 }
                 field("Account No."; Rec."Account No.")
                 {
-                    Editable = false;
+                    Editable = locklines;
                     ApplicationArea = all;
                 }
                 field("Account Name"; Rec."Account Name")
@@ -47,10 +48,12 @@ page 50065 "Staff Advance Lines"
                 {
                     //Editable = false;
                     ApplicationArea = all;
+                    Editable = locklines;
                 }
                 field(Amount; Rec.Amount)
                 {
-                    Editable = Editno;
+                    // Editable = Editno;
+
                     ApplicationArea = all;
                     trigger OnValidate()
                     begin
@@ -84,12 +87,13 @@ page 50065 "Staff Advance Lines"
                 field("Amount LCY"; Rec."Amount LCY")
                 {
                     ApplicationArea = all;
-                    Editable = false;
+                    Editable = locklines;
                 }
                 field("Due Date"; Rec."Due Date")
                 {
                     ApplicationArea = all;
                     Caption = 'Payment Date';
+                    Editable = locklines;
                 }
                 field("Date Issued"; Rec."Date Issued")
                 {
@@ -98,7 +102,7 @@ page 50065 "Staff Advance Lines"
                 }
                 field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
-                    Editable = false;
+                    Editable = locklines;
                     Visible = true;
                     ApplicationArea = all;
                     trigger OnValidate()
@@ -124,6 +128,11 @@ page 50065 "Staff Advance Lines"
                 field("Shortcut Dimension 6 Code"; Rec."Shortcut Dimension 6 Code")
                 {
                     ApplicationArea = all;
+                }
+                field("Requested Amount"; Rec."Requested Amount")
+                {
+                    Editable = locklines;
+                    ApplicationArea = All;
                 }
             }
         }
@@ -152,13 +161,30 @@ page 50065 "Staff Advance Lines"
         }
     }
 
-    trigger OnOpenPage()
+    // trigger OnOpenPage()
+    // begin
+    //     Editno := true;
+
+    //     if Rec.Status <> Rec.Status::Open
+    //     then
+    //         Editno := false;
+    // end;
+
+    trigger OnAfterGetRecord()
     begin
-        Editno := true;
+        locklines := lockAdvLine();
+    end;
+
+    procedure lockAdvLine(): Boolean
+    begin
+        //  Editno := true;
+
         if Rec.Status <> Rec.Status::Open
         then
-            Editno := false;
+            exit(true) else
+            exit(false);
     end;
+
 
 
     var
@@ -167,5 +193,7 @@ page 50065 "Staff Advance Lines"
         Bal: Decimal;
         DimVal: Record "Dimension Value";
         Editno: Boolean;
+        UserSetup: Record "User Setup";
+        locklines: boolean;
 }
 

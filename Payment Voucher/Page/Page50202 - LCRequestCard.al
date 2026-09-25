@@ -948,7 +948,7 @@ page 50202 "LC Request Card"
         UpdatePageControls();
 
         begin
-            rec.SetFilter("Pv Created By", UserId);
+            // rec.SetFilter("Pv Created By", UserId);
         end;
 
     end;

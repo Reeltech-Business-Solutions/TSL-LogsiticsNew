@@ -11,7 +11,7 @@ page 50262 "Posted Advance"
     PageType = API;
     SourceTable = "Staff Advance Header";
     SourceTableView = where(Status = const(Posted));
-    
+
     layout
     {
         area(Content)
@@ -20,7 +20,7 @@ page 50262 "Posted Advance"
             {
                 field(systemId; Rec.SystemId)
                 {
-                   
+
                 }
                 field(no; Rec."No.")
                 {
@@ -32,7 +32,7 @@ page 50262 "Posted Advance"
                     Caption = 'Date';
                     ApplicationArea = All;
                 }
-               
+
 
                 field(department_name; Rec."Function Name")
                 {
@@ -45,6 +45,11 @@ page 50262 "Posted Advance"
 
                     ApplicationArea = All;
                 }
+                field("AccountNo"; Rec."Account No.")
+                {
+
+                }
+
                 field(employee_email; Rec."employee email")
                 {
                     ApplicationArea = All;
@@ -61,7 +66,7 @@ page 50262 "Posted Advance"
                             Error('No employee found with email %1', Rec."employee email");
                     end;
                 }
-                 field(department_code; Rec."Shortcut Dimension 1 Code")
+                field(department_code; Rec."Shortcut Dimension 1 Code")
                 {
 
                     ApplicationArea = All;
@@ -131,7 +136,7 @@ page 50262 "Posted Advance"
 
             }
 
-            }
         }
     }
+}
 

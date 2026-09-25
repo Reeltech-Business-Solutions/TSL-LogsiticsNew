@@ -52,7 +52,7 @@ table 50069 "Staff Claim Lines"
                     "Date Taken" := ImprestHeader.Date;
                     // ImprestHeader.TESTFIELD("Responsibility Center");
                     ImprestHeader.TestField("Global Dimension 1 Code");
-                    ImprestHeader.TestField("Shortcut Dimension 2 Code");
+                    //  ImprestHeader.TestField("Shortcut Dimension 2 Code");
                     "Global Dimension 1 Code" := ImprestHeader."Global Dimension 1 Code";
                     "Shortcut Dimension 2 Code" := ImprestHeader."Shortcut Dimension 2 Code";
                     "Shortcut Dimension 3 Code" := ImprestHeader."Shortcut Dimension 3 Code";
@@ -336,7 +336,7 @@ table 50069 "Staff Claim Lines"
             "Date Taken" := ImprestHeader.Date;
             //ImprestHeader.TESTFIELD("Responsibility Center");
             ImprestHeader.TestField("Global Dimension 1 Code");
-            ImprestHeader.TestField("Shortcut Dimension 2 Code");
+            //  ImprestHeader.TestField("Shortcut Dimension 2 Code");
             "Global Dimension 1 Code" := ImprestHeader."Global Dimension 1 Code";
             "Shortcut Dimension 2 Code" := ImprestHeader."Shortcut Dimension 2 Code";
             "Shortcut Dimension 3 Code" := ImprestHeader."Shortcut Dimension 3 Code";

@@ -133,7 +133,8 @@ table 50008 "Contract Line"
         }
         field(21; "Header Id"; Guid)
         {
-            DataClassification = ToBeClassified;
+            // DataClassification = ToBeClassified;
+            TableRelation = "Contract Agreement".SystemId;
         }
     }
     keys
@@ -149,6 +150,19 @@ table 50008 "Contract Line"
         }
 
     }
+
+    trigger OnInsert()
+    begin
+        ImprestHeader.Reset;
+        ImprestHeader.SetRange(ImprestHeader."No.", "Document No.");
+        if ImprestHeader.FindFirst then begin
+            "Header Id" := ImprestHeader.SystemId;
+        end;
+    end;
+
+
+    var
+        ImprestHeader: Record "Contract Agreement";
 
     local procedure InitNewLine(VAR NewContractLine: Record "Contract Line")
     var

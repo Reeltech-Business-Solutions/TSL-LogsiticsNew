@@ -42,16 +42,20 @@ page 50081 "Staff Claims List"
                     Editable = false;
                     ApplicationArea = All;
                 }
+                field("Total Net Amount"; Rec."Total Net Amount")
+                { ApplicationArea = All; }
                 field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
                 {
                     Editable = ShortcutDimension2CodeEditable;
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Budget Center Name"; Rec."Budget Center Name")
                 {
                     Caption = 'Team Code Description';
                     Editable = false;
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Account No."; Rec."Account No.")
                 {
@@ -69,6 +73,7 @@ page 50081 "Staff Claims List"
                 {
                     Editable = "Currency CodeEditable";
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Paying Bank Account"; Rec."Paying Bank Account")
                 {
@@ -85,25 +90,25 @@ page 50081 "Staff Claims List"
                     Caption = 'Claim Description';
                     ApplicationArea = All;
                 }
-                field(Cashier; Rec.Cashier)
-                {
-                    Caption = 'Requestor ID';
-                    Editable = false;
-                    ApplicationArea = All;
-                }
+
                 field(Status; Rec.Status)
                 {
                     Editable = false;
                     ApplicationArea = All;
                 }
-                field("Total Net Amount"; Rec."Total Net Amount")
-                { ApplicationArea = All; }
+
                 field("Total Net Amount LCY"; Rec."Total Net Amount LCY")
                 { ApplicationArea = All; }
                 field("Payment Release Date"; Rec."Payment Release Date")
                 {
                     Caption = 'Posting Date';
                     Editable = "Payment Release DateEditable";
+                    ApplicationArea = All;
+                }
+                field(Cashier; Rec.Cashier)
+                {
+                    Caption = 'Requestor ID';
+                    Editable = false;
                     ApplicationArea = All;
                 }
                 field("Pay Mode"; Rec."Pay Mode")
@@ -279,7 +284,7 @@ page 50081 "Staff Claims List"
                     trigger OnAction()
                     begin
                         Xmlport.Run(50006, true, true);
-                       // Message('Staff Claim Headers were imported successfully.');
+                        // Message('Staff Claim Headers were imported successfully.');
                     end;
                 }
                 action(StaffCLMLines)
@@ -294,7 +299,7 @@ page 50081 "Staff Claims List"
                     trigger OnAction()
                     begin
                         Xmlport.Run(50007, true, true);
-                       // Message('Staff claim lines were imported successfully.');
+                        // Message('Staff claim lines were imported successfully.');
                     end;
                 }
                 separator(Separator1102756006)

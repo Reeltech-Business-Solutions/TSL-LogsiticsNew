@@ -160,7 +160,7 @@ tableextension 50018 PurchLine extends "Purchase Line"
             Rec."Shortcut Dimension 5 Code" := purchase_header."Shortcut Dimension 5 Code";
             Rec."Shortcut Dimension 4 Code" := purchase_header."Shortcut Dimension 4 Code";
             Rec."Shortcut Dimension 3 Code" := purchase_header."Shortcut Dimension 3 Code";
-            Rec."Buy-from Vendor No." := purchase_header."Buy-from Vendor No.";
+            Rec.VALIDATE("Buy-from Vendor No.", purchase_header."Buy-from Vendor No.");
         end;
     end;
 

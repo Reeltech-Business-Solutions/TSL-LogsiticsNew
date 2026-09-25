@@ -1332,6 +1332,7 @@ page 50046 "Purchase Local Req"
     // NoSeriesMgt: Codeunit NoSeriesManagement;
     //  NoSeriesCode: Code[20];
     begin
+        // Rec.Status := Rec.Status::Released;
         Rec."Purchase Type" := Rec."Purchase Type"::"Local Requisition";
         Rec."Document Type" := Rec."Document Type"::Quote;
         //DocNo := NoSeriesMgt.GetNextNo('P-REQ', TODAY, TRUE);

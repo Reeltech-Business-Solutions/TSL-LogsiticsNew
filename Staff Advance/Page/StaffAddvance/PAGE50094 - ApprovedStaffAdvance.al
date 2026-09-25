@@ -16,12 +16,12 @@ page 50094 "Approved Staff Advance Request"
         {
             group("General Information")
             {
-                Editable = true;
+                //Editable = true;
                 //ShowCaption = false;
                 Visible = true;
                 field("No."; Rec."No.")
                 {
-                    //Editable = CreateVouch;
+                    Editable = locklines;
                     ApplicationArea = All;
                 }
                 field(Date; Rec.Date)
@@ -31,7 +31,7 @@ page 50094 "Approved Staff Advance Request"
                 }
                 field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
-                    Editable = GlobalDimension1CodeEditable;
+                    Editable = locklines;
                     NotBlank = true;
                     Visible = false;
                     ApplicationArea = All;
@@ -39,11 +39,12 @@ page 50094 "Approved Staff Advance Request"
                 field("Shortcut Dimension 1 Code"; Rec."Shortcut Dimension 1 Code")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field("Function Name"; Rec."Function Name")
                 {
                     Caption = 'Description';
-                    Editable = false;
+                    Editable = locklines;
                     Visible = false;
                     ApplicationArea = All;
                 }
@@ -63,6 +64,7 @@ page 50094 "Approved Staff Advance Request"
                 {
                     Caption = 'Staff No.';
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field(Payee; Rec.Payee)
                 {
@@ -91,14 +93,14 @@ page 50094 "Approved Staff Advance Request"
                 }
                 field("Pay Mode"; Rec."Pay Mode")
                 {
-                    Editable = "Pay ModeEditable";
+                    Editable = locklines;
                     ValuesAllowed = " ", Cash, Cheque, EFT;
                     Visible = true;
                     ApplicationArea = All;
                 }
                 field("Paying Bank Account"; Rec."Paying Bank Account")
                 {
-                    Editable = "Paying Bank AccountEditable";
+                    Editable = locklines;
                     Visible = true;
                     ApplicationArea = All;
                 }
@@ -111,7 +113,7 @@ page 50094 "Approved Staff Advance Request"
                 }
                 field(Purpose; Rec.Purpose)
                 {
-                    Editable = true; //jj121021
+                    Editable = locklines; //jj121021
                     ApplicationArea = All;
                 }
                 field(Cashier; Rec.Cashier)
@@ -122,7 +124,7 @@ page 50094 "Approved Staff Advance Request"
                 }
                 field(Status; Rec.Status)
                 {
-                   // Editable = false; //jj131021
+                    Editable = EditYes;
                     ApplicationArea = All;
                     trigger OnValidate()
                     begin
@@ -144,14 +146,14 @@ page 50094 "Approved Staff Advance Request"
                 field("Payment Release Date"; Rec."Payment Release Date")
                 {
                     Caption = 'Posting Date';
-                    Editable = "Payment Release DateEditable";
+                    Editable = locklines;
                     Visible = PostingDateVisible;
                     ApplicationArea = All;
                 }
                 field("Cheque No."; Rec."Cheque No.")
                 {
                     Caption = 'Cheque/EFT No.';
-                    Editable = "Cheque No.Editable";
+                    Editable = locklines;
                     Visible = ChequeNoVisible;
                     ApplicationArea = All;
                 }
@@ -187,6 +189,11 @@ page 50094 "Approved Staff Advance Request"
                     ApplicationArea = All;
                     Editable = false;
                 }
+                // field("Requested Amount";Rec."Requested Amount")
+                // {
+                //     Visible = false;
+                //     ApplicationArea = All;
+                // }
             }
             part(Control1000000004; "Staff Advance Lines")
             {
@@ -577,6 +584,8 @@ page 50094 "Approved Staff Advance Request"
     }
 
     trigger OnAfterGetRecord()
+    var
+        staffadvReqLine: Record "Staff Advance Lines";
     begin
         //OnAfterGetCurrRecord;
         if rec."Shortcut Dimension 1 Code" <> '' then
@@ -589,6 +598,25 @@ page 50094 "Approved Staff Advance Request"
             CreateVouch := false
         else
             CreateVouch := true;
+
+        EditYes := true;
+        if UserSetup.Get(UserId) then begin
+            if UserSetup."Edit AMT" then
+                EditYes := true else
+                EditYes := false;
+        end;
+
+        Rec."Requested Amount" := 0;
+
+        staffadvReqLine.SetRange("No.", Rec."No.");
+        if staffadvReqLine.findset() then
+            repeat
+                Rec."Requested Amount" += staffadvReqLine."Requested Amount";
+            until staffadvReqLine.Next() = 0;
+
+        locklines := lockAdvLine();
+
+
     end;
 
     trigger OnInit()
@@ -682,7 +710,14 @@ page 50094 "Approved Staff Advance Request"
         EditNo := true;
         if Rec.Status <> Rec.Status::Open
         then
-            EditNo := false;
+            // EditNo := false;
+
+            EditYes := true;
+        if UserSetup.Get(UserId) then begin
+            if UserSetup."Edit AMT" then
+                EditYes := true else
+                EditYes := false;
+        end;
 
         if Rec."Pay Mode" = Rec."Pay Mode"::EFT then
             ChequeNoVisible := false;
@@ -771,6 +806,8 @@ page 50094 "Approved Staff Advance Request"
         PageActionsVisible: Boolean;
         CreateVouch: Boolean;
         EditNo: Boolean;
+        EditYes: Boolean;
+        UserSetup: Record "User Setup";
         OpenApprovalEntriesExistForCurrUser: Boolean;
         AttachmentRec: Record Attachment;
         Text001: Label 'There are still some pending document(s) on your account or you have not retired an existing staff advance.Please list & select the pending document to use.';
@@ -780,6 +817,7 @@ page 50094 "Approved Staff Advance Request"
         CanCancelApprovalForRecord: Boolean;
         ApproovedPost: Codeunit "Tax Calculation1";
         ApproovedToPost: Boolean;
+        locklines: Boolean;
 
     procedure LinesCommitmentStatus() Exists: Boolean
     begin
@@ -991,6 +1029,16 @@ page 50094 "Approved Staff Advance Request"
         xRec := Rec;
         UpdateControls;
         CurrPage.Update;
+    end;
+
+
+
+    procedure lockAdvLine(): Boolean
+    begin
+        if Rec.Status <> Rec.Status::Open
+          then
+            exit(true) else
+            exit(false);
     end;
 
     local procedure SetControlAppearance()

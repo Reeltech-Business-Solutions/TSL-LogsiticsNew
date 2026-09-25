@@ -164,12 +164,14 @@ table 50063 "Staff Advance Header"
         {
             Description = 'Stores the status of the record in the database';
             OptionMembers = Open,Posted,Cancelled,"Pending Approval",Approved;
+            OptionCaption = 'Open, Posted, Cancelled, Pending Approval, Approved';
+
         }
         field(38; "Payment Type"; Option)
         {
             OptionMembers = Imprest;
         }
-        
+
         field(55; "Shortcut Dimension 1 Code"; Code[20])
         {
             CaptionClass = '1,2,1';
@@ -486,7 +488,8 @@ table 50063 "Staff Advance Header"
                 //     else
                 //Payee := '';
                 if Employ.Get("Account No.") then
-                    Payee := Employ."First Name" + ' ' + Employ."Middle Name" + ' ' + Employ."Last Name";
+                    "employee email" := Employ."Company E-Mail";
+                Payee := Employ."First Name" + ' ' + Employ."Middle Name" + ' ' + Employ."Last Name";
                 "Global Dimension 1 Code" := Employ."Global Dimension 1 Code";
                 "Shortcut Dimension 2 Code" := Employ."Global Dimension 2 Code";
                 "Responsibility Center" := Employ."Responsibility Center";
@@ -610,7 +613,7 @@ table 50063 "Staff Advance Header"
         {
 
         }
-        field(50014; "employee email"; code[50])
+        field(50014; "employee email"; code[100])
         {
             NotBlank = true;
             trigger OnValidate()
@@ -622,7 +625,11 @@ table 50063 "Staff Advance Header"
         {
             TableRelation = job;
         }
-        
+        field(50016; "Requested Amount"; Decimal)
+        {
+
+        }
+
     }
 
     keys

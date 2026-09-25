@@ -81,42 +81,42 @@ codeunit 70002 Subscriber
         ReceiveInvoiceQst2: Label '&Invoice';
     begin
 
-        Result := true;
-        //  if (PurchaseHeader."Purchase Type" = PurchaseHeader."Purchase Type"::Local) or (PurchaseHeader."Purchase Type" = PurchaseHeader."Purchase Type"::Foreign) then begin
-        UserSettgs.Reset();
-        UserSettgs.SetFilter(UserSettgs."User ID", '%1', UserId);
-        if UserSettgs.FindFirst() then
-            UserSettgs.CalcFields(Role);
-        if (UserSettgs.Role = 'Purchasing Agent') or (UserSettgs.Role = 'Inventory Manager') then begin
-            // if UserSettgs.Role = 'Inventory Manager' then begin
-            Selection := StrMenu(ReceiveInvoiceQst1, 1);
-            if Selection = 0 then
-                Result := false;
-            if Selection = 3 then
-                Result := false;
-            PurchaseHeader.Receive := Selection in [1, 1];
-            // PurchaseHeader.Invoice := Selection in [2];
-            IsHandled := true;
-        end;
+        // Result := true;
+        // //  if (PurchaseHeader."Purchase Type" = PurchaseHeader."Purchase Type"::Local) or (PurchaseHeader."Purchase Type" = PurchaseHeader."Purchase Type"::Foreign) then begin
+        // UserSettgs.Reset();
+        // UserSettgs.SetFilter(UserSettgs."User ID", '%1', UserId);
+        // if UserSettgs.FindFirst() then
+        //     UserSettgs.CalcFields(Role);
+        // if (UserSettgs.Role = 'Purchasing Agent') or (UserSettgs.Role = 'Inventory Manager') then begin
+        //     // if UserSettgs.Role = 'Inventory Manager' then begin
+        //     Selection := StrMenu(ReceiveInvoiceQst1, 1);
+        //     if Selection = 0 then
+        //         Result := false;
+        //     if Selection = 3 then
+        //         Result := false;
+        //     PurchaseHeader.Receive := Selection in [1, 1];
+        //     // PurchaseHeader.Invoice := Selection in [2];
+        //     IsHandled := true;
+        // end;
 
-        Result := true;
-        UserSettgs.Reset();
-        UserSettgs.SetFilter(UserSettgs."User ID", '%1', UserId);
-        if UserSettgs.FindFirst() then
-            UserSettgs.CalcFields(Role);
-        if UserSettgs.Role = 'Accounting Manager' then begin
-            Selection1 := StrMenu(ReceiveInvoiceQst2, 1);
-            if Selection1 = 0 then
-                Result := false;
-            if Selection1 = 3 then
-                Result := false;
-            // PurchaseHeader.Receive := Selection in [1, 1];
-            PurchaseHeader.Invoice := Selection1 in [1, 1];
-            IsHandled := true;
-        end;
+        //     Result := true;
+        //     UserSettgs.Reset();
+        //     UserSettgs.SetFilter(UserSettgs."User ID", '%1', UserId);
+        //     if UserSettgs.FindFirst() then
+        //         UserSettgs.CalcFields(Role);
+        //     if UserSettgs.Role = 'Accounting Manager' then begin
+        //         Selection1 := StrMenu(ReceiveInvoiceQst2, 1);
+        //         if Selection1 = 0 then
+        //             Result := false;
+        //         if Selection1 = 3 then
+        //             Result := false;
+        //         // PurchaseHeader.Receive := Selection in [1, 1];
+        //         PurchaseHeader.Invoice := Selection1 in [1, 1];
+        //         IsHandled := true;
+        //     end;
+        // end;
+        // IsHandled := true;
     end;
-    // IsHandled := true;
-    //  end;
 
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Purch.-Post + Print", 'OnBeforeSelectPostOrderOption', '', false, false)]

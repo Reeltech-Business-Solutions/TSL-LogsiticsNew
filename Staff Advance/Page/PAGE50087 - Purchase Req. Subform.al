@@ -1,4 +1,4 @@
- page 50087 "Purchase Requisition Subform"
+page 50087 "Purchase Requisition Subform"
 {
     AutoSplitKey = true;
     Caption = 'Lines';
@@ -747,7 +747,7 @@
 
                         trigger OnAction()
                         begin
-                           PurchAvailabilityMgt.ShowItemAvailabilityFromPurchLine(Rec, "Item Availability Type"::Variant)
+                            PurchAvailabilityMgt.ShowItemAvailabilityFromPurchLine(Rec, "Item Availability Type"::Variant)
                         end;
                     }
                     action(Location)
@@ -760,7 +760,7 @@
 
                         trigger OnAction()
                         begin
-                           PurchAvailabilityMgt.ShowItemAvailabilityFromPurchLine(Rec, "Item Availability Type"::Location)
+                            PurchAvailabilityMgt.ShowItemAvailabilityFromPurchLine(Rec, "Item Availability Type"::Location)
                         end;
                     }
                     action("BOM Level")
@@ -773,7 +773,7 @@
 
                         trigger OnAction()
                         begin
-                           PurchAvailabilityMgt.ShowItemAvailabilityFromPurchLine(Rec, "Item Availability Type"::BOM)
+                            PurchAvailabilityMgt.ShowItemAvailabilityFromPurchLine(Rec, "Item Availability Type"::BOM)
                         end;
                     }
                 }
@@ -842,7 +842,7 @@
                     trigger OnAction()
                     var
                         DocumentAttachmentDetails: Page "Document Attachment Details";
-                                                       RecRef: RecordRef;
+                        RecRef: RecordRef;
                     begin
                         RecRef.GetTable(Rec);
                         DocumentAttachmentDetails.OpenForRecRef(RecRef);

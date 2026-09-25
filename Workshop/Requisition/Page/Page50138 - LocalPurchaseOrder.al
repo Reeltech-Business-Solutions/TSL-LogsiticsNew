@@ -62,12 +62,7 @@ page 50138 "Local Purchase Order"
                             CurrPage.Update();
                     end;
                 }
-                field("Posting Description"; Rec."Posting Description")
-                {
-                    ApplicationArea = Suite;
-                    ToolTip = 'Specifies additional posting information for the document. After you post the document, the description can add detail to vendor and customer ledger entries.';
-                    Visible = false;
-                }
+
                 group("Buy-from")
                 {
                     Caption = 'Buy-from';
@@ -186,6 +181,11 @@ page 50138 "Local Purchase Order"
                     begin
                         SaveInvoiceDiscountAmount;
                     end;
+                }
+                field("Posting Description"; Rec."Posting Description")
+                {
+                    ApplicationArea = Suite;
+                    ToolTip = 'Specifies additional posting information for the document. After you post the document, the description can add detail to vendor and customer ledger entries.';
                 }
                 field("Due Date"; Rec."Due Date")
                 {

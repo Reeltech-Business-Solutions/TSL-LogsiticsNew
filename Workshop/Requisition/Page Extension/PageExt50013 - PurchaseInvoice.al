@@ -38,6 +38,14 @@ pageextension 50013 PurchaseInVoice extends "Purchase Invoice"
             }
 
         }
+        addafter("Posting Date")
+        {
+            field("Posting Description1"; Rec."Posting Description")
+            {
+                ApplicationArea = All;
+                Visible = true;
+            }
+        }
 
     }
 

@@ -72,7 +72,7 @@ page 50228 "Issue Voucher"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Status field.';
-                    Editable = false;
+                    // Editable = false;
                 }
                 field("Responsibility Center"; Rec."Responsibility Center")
                 {

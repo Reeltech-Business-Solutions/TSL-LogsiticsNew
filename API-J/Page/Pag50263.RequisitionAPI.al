@@ -63,6 +63,17 @@ page 50263 "Requisition API"
             }
         }
     }
+
+    trigger OnNewRecord(BelowxRec: Boolean)
+    begin
+        Rec.Status := Rec.Status::Released;
+        Rec."Document Type" := Rec."Document Type"::Quote;
+        Rec."Purchase Type" := rec."Purchase Type"::"Local Requisition";
+
+
+    end;
+
+
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
         Rec."Purchase Type" := Rec."Purchase Type"::"Local Requisition";
@@ -70,4 +81,9 @@ page 50263 "Requisition API"
         Rec."Pay-to Vendor No." := 'INT0001';
         Rec.status := Rec.Status::Open;
     end;
+
+
+
+
+
 }

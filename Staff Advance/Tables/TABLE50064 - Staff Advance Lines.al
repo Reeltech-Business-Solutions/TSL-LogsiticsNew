@@ -161,7 +161,7 @@ table 50064 "Staff Advance Lines"
         field(54; Purpose; Text[250])
         {
         }
-       
+
         field(56; "Shortcut Dimension 2 Code"; Code[20])
         {
             CaptionClass = '1,2,2';
@@ -179,7 +179,7 @@ table 50064 "Staff Advance Lines"
                 ValidateShortcutDimCode(2, "Shortcut Dimension 2 Code");
             end;
         }
-       
+
         field(79; "Budgetary Control A/C"; Boolean)
         {
         }
@@ -214,7 +214,7 @@ table 50064 "Staff Advance Lines"
         }
         field(84; "Advance Type"; Code[20])
         {
-           //  TableRelation = "Receipts and Payment Types".Code WHERE(Type = CONST(Advance),
+            //  TableRelation = "Receipts and Payment Types".Code WHERE(Type = CONST(Advance),
             //                                                          Blocked = CONST(false));
 
             TableRelation =
@@ -346,6 +346,10 @@ table 50064 "Staff Advance Lines"
             Caption = 'Shortcut Dimension 7 Code';
             Description = 'Stores the reference of the fourth global dimension in the database';
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(7));
+        }
+        field(50012; "Requested Amount"; Decimal)
+        {
+
         }
     }
 

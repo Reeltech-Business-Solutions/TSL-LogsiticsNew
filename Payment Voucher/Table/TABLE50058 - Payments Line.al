@@ -71,7 +71,7 @@ table 50058 "Payments Line"
                         "Account No." := RecPayTypes."Bank Account";
                         Validate("Account No.");
                     end;
-                 end;
+                end;
 
                 PHead.Reset;
                 PHead.SetRange(PHead."No.", "No.");
@@ -1038,6 +1038,10 @@ table 50058 "Payments Line"
         {
             Editable = false;
         }
+        field(56004; "Header Id"; Guid)
+        {
+            TableRelation = "Payments Header".SystemId;
+        }
     }
 
     keys
@@ -1082,6 +1086,7 @@ table 50058 "Payments Line"
         PHead.Reset;
         PHead.SetRange(PHead."No.", "No.");
         if PHead.FindFirst then begin
+            "Header Id" := PHead.SystemId;
             Date := PHead.Date;
             // PHead.TESTFIELD("Responsibility Center");
             "Global Dimension 1 Code" := PHead."Global Dimension 1 Code";
@@ -1106,6 +1111,7 @@ table 50058 "Payments Line"
         TestField(Committed, false);
     end;
 
+
     trigger OnModify()
     begin
         /*
@@ -1123,6 +1129,7 @@ table 50058 "Payments Line"
 
     var
         PH: Record "Payments Header";
+        ImpresetHeader: Record "Payments Header";
         VLedgEntry: Record "Vendor Ledger Entry";
         ICPartner: Record "IC Partner";
         FPurch: Record "Purch. Inv. Header";
@@ -1168,7 +1175,7 @@ table 50058 "Payments Line"
         TariffCode: Record "Tariff Codes2";
         VendLedger: Record "Vendor Ledger Entry";
         ApplyVendEntriescodeunit: Codeunit applyvendorledger3;
-      LCReqLin: Page "LC Request Line";
+        LCReqLin: Page "LC Request Line";
 
     procedure SetAmountToApply(AppliesToDocNo: Code[20]; VendorNo: Code[20])
     var

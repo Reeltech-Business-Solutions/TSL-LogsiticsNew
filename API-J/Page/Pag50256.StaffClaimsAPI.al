@@ -19,9 +19,9 @@ page 50256 "Staff Claim API"
             {
                 field(systemId; Rec.SystemId)
                 {
-                    
+
                 }
-                
+
                 field("no"; Rec."No.")
                 {
 
@@ -124,5 +124,10 @@ page 50256 "Staff Claim API"
     begin
         Rec.Status := Rec.Status::Approved;
 
+    end;
+
+    trigger OnNewRecord(BelowxRec: Boolean)
+    begin
+        Rec.Status := Rec.Status::Approved;
     end;
 }

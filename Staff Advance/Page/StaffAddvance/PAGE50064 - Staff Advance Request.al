@@ -16,7 +16,7 @@ page 50064 "Staff Advance Request"
         {
             group("General Information")
             {
-                Editable = true;
+                //Editable = true;
                 //ShowCaption = false;
                 Visible = true;
 
@@ -127,7 +127,7 @@ page 50064 "Staff Advance Request"
                 }
                 field(Status; Rec.Status)
                 {
-                    Editable = false;
+                    // Editable = false;
                     ApplicationArea = all;
                     trigger OnValidate()
                     begin
@@ -189,6 +189,11 @@ page 50064 "Staff Advance Request"
 
                     ApplicationArea = All;
                     Editable = false;
+                }
+                field("Requested Amount"; Rec."Requested Amount")
+                {
+                    Visible = false;
+                    ApplicationArea = All;
                 }
             }
             part("Staff Advance Lines"; "Staff Advance Lines")
@@ -688,8 +693,8 @@ page 50064 "Staff Advance Request"
             // rec.SetFilter("Created By", '%1', UserId);
         end;
 
-        IF Rec.Status = Rec.Status::"Pending Approval" THEN
-            CurrPage.EDITABLE := FALSE;
+        // IF Rec.Status = Rec.Status::"Pending Approval" THEN
+        //     CurrPage.EDITABLE := FALSE;
 
         EditNo := true;
         if Rec.Status <> Rec.Status::Open

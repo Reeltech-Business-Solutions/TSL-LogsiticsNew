@@ -148,6 +148,10 @@ table 50007 "Contract Agreement"
         {
 
         }
+        // field(27; "System ID"; Guid)
+        // {
+
+        // 
     }
 
     keys

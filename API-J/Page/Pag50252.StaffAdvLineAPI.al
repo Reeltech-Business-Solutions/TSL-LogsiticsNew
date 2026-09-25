@@ -54,6 +54,11 @@ page 50252 StaffAdvanceLines
                 {
                     ToolTip = 'Specifies the value of the Amount field.';
                     ApplicationArea = All;
+
+                    trigger OnValidate()
+                    begin
+                        Rec."Requested Amount" := Rec."Amount";
+                    end;
                 }
                 field("area_code"; Rec."Shortcut Dimension 3 Code")
                 {
@@ -64,6 +69,10 @@ page 50252 StaffAdvanceLines
                 {
                     ToolTip = 'Specifies the value of the Global Dimension 1 Code field.';
                     ApplicationArea = All;
+                }
+                field("Requested_Amount"; Rec."Requested Amount")
+                {
+
                 }
                 field(header_id; Rec."Header Id") { }
             }

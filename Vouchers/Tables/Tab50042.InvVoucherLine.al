@@ -362,6 +362,11 @@ table 50042 "Inv. Voucher Line"
                 ValidateShortcutDimCode(8, "Shortcut Dimension 8 Code");
             end;
         }
+        field(50; "Header ID"; Guid)
+        {
+            TableRelation = "Inv.Voucher Header".SystemId;
+        }
+
     }
 
     keys
@@ -371,6 +376,18 @@ table 50042 "Inv. Voucher Line"
             Clustered = true;
         }
     }
+
+    trigger OnInsert()
+    begin
+        InvVoucherHdr.Reset;
+        InvVoucherHdr.SetRange("Document No.", "Document No.");
+
+        if InvVoucherHdr.FindFirst then begin
+            "Header ID" := InvVoucherHdr.SystemId;
+        end;
+    end;
+
+
     var
         InvVoucherHdr: Record "Inv.Voucher Header";
 
@@ -384,6 +401,8 @@ table 50042 "Inv. Voucher Line"
 
         Amount: Decimal;
         DimMgt: Codeunit DimensionManagement;
+
+
 
 
 

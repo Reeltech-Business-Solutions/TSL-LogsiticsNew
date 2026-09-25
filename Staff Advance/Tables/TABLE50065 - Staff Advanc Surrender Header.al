@@ -333,6 +333,7 @@ table 50065 "Staff Advanc Surrender Header"
                 "Currency Code" := PayHeader."Currency Code";
                 "Bank Code" := PayHeader."Paying Bank Account";
                 Narration := PayHeader.Purpose;
+                "employee email" := PayHeader."employee email";
 
                 "Date Posted" := PayHeader."Date Posted";
                 "Global Dimension 1 Code" := PayHeader."Global Dimension 1 Code";
@@ -559,8 +560,8 @@ table 50065 "Staff Advanc Surrender Header"
         }
         field(95; "Allow Overexpenditure"; Boolean)
         {
-           // Editable = false;
-           
+            // Editable = false;
+
         }
         field(96; "Open for Overexpenditure by"; Code[30])
         {
@@ -619,7 +620,7 @@ table 50065 "Staff Advanc Surrender Header"
         field(50004; Narration; Text[100])
         {
         }
-        field(50005; "Advance Narration"; Text[100])
+        field(50005; "Advance Narration"; Text[250])
         {
             TableRelation = "Staff Advance Header".Purpose;
         }
@@ -627,6 +628,7 @@ table 50065 "Staff Advanc Surrender Header"
         {
             //OptionMembers = "Advance Retirement","Trip Retirement",LC;
         }
+
         field(50007; "Created By"; Text[50])
         {
 
@@ -635,7 +637,7 @@ table 50065 "Staff Advanc Surrender Header"
         {
 
         }
-         field(50009; "job no"; code[50])
+        field(50009; "job no"; code[50])
         {
             TableRelation = Job;
         }

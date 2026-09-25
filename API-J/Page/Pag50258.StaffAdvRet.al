@@ -10,20 +10,25 @@ page 50258 "Staff Adv Ret"
     EntitySetName = 'staffAdvRets';
     PageType = API;
     SourceTable = "Staff Advanc Surrender Header";
-    
-    
+    SourceTableView = where(Posted = const(false), "Retirement Type" = const("Advance Retirement"));
+
+
     layout
     {
         area(Content)
         {
             repeater(General)
             {
-                 field(no; Rec."No.")
+                field(no; Rec."No.")
                 {
                     Caption = 'No.';
                     ApplicationArea = All;
                 }
 
+                field("Account_No"; Rec."Account No.")
+                {
+                    ApplicationArea = all;
+                }
                 field(department_code; rec."Global Dimension 1 Code")
                 {
 
@@ -35,21 +40,21 @@ page 50258 "Staff Adv Ret"
                     ApplicationArea = All;
                 }
 
-                field(employee_email; Rec."employee email")
-                {
-                    ApplicationArea = All;
+                // field(employee_email; Rec."employee email")
+                // {
+                //     ApplicationArea = All;
 
-                    trigger OnValidate()
-                    var
-                        Employee: Record Employee;
-                    begin
-                        Employee.setRange("Company E-Mail", Rec."employee email");
-                        if Employee.FindFirst() then
-                            Rec.Validate("Account No.", Employee."No.")
-                        else
-                            Error('No employee found with email %1', Rec."employee email");
-                    end;
-                }
+                //     trigger OnValidate()
+                //     var
+                //         Employee: Record Employee;
+                //     begin
+                //         Employee.setRange("Company E-Mail", Rec."employee email");
+                //         if Employee.FindFirst() then
+                //             Rec.Validate("Account No.", Employee."No.")
+                //         else
+                //             Error(' email %1', Employee."No.");
+                //     end;
+                // }
 
                 field(staff_adv_no; Rec."Imprest Issue Doc. No")
                 {
@@ -58,7 +63,6 @@ page 50258 "Staff Adv Ret"
 
 
                 }
-
 
 
                 field(payee; Rec.Payee)
@@ -77,12 +81,13 @@ page 50258 "Staff Adv Ret"
 
                     ApplicationArea = All;
                 }
+
                 field(job_no; Rec."job no")
                 {
                     Caption = 'Job';
                     ApplicationArea = all;
                 }
-               
+
                 field(currency_code; Rec."Currency Code")
                 {
                     Caption = 'Currency Code';
@@ -91,10 +96,20 @@ page 50258 "Staff Adv Ret"
 
                 field(allow_overexpenditure; Rec."Allow Overexpenditure")
                 {
-                    Caption = 'Paying Bank Account';
+
                     ApplicationArea = All;
 
 
+                }
+                field("responsibility_center"; Rec."Responsibility Center")
+                {
+                    Caption = 'Responsibility Center';
+                    ApplicationArea = All;
+                }
+                field("bank_code"; Rec."Bank Code")
+                {
+                    Caption = 'Bank Code';
+                    ApplicationArea = All;
                 }
 
 
@@ -110,7 +125,7 @@ page 50258 "Staff Adv Ret"
                     ApplicationArea = All;
                 }
 
-                part(lines;StaffAdvRetLines)
+                part(lines; StaffAdvRetLines)
                 {
 
                     EntityName = 'line';
@@ -129,6 +144,8 @@ page 50258 "Staff Adv Ret"
         Rec."Account Type" := "Account Type"::"Employee";
         Rec."Retirement Type" := "Retirement Type"::"Advance Retirement";
         Rec.Status := Rec.Status::Approved;
+        // Rec.Posted := false;
+        // Rec."Imprest Issue Doc. No" := Rec."Imprest Issue Doc. No";
 
         //  Rec.validate("Imprest Issue Doc. No", 'STVADV-0013');
     end;
@@ -141,18 +158,21 @@ page 50258 "Staff Adv Ret"
         Employee: Record Employee;
         AdvDocNo: Code[20];
     begin
-        // Validate employee email
-        Employee.SetRange("Company E-Mail", Rec."employee email");
-        if not Employee.FindFirst() then
-            Error('No employee found with email %1', Rec."employee email");
+        //  Validate employee email
+
 
         Rec."Account Type" := "Account Type"::"Employee";
         Rec."Retirement Type" := "Retirement Type"::"Advance Retirement";
-        Rec.Validate("Account No.", Employee."No.");
+        // Rec.Validate("Account No.", Employee."No.");
+        //Rec."Account No." := Employee."No.";
 
 
         // Save the advance doc no then clear it for clean insert
         AdvDocNo := Rec."Imprest Issue Doc. No";
+
+        // Employee.SetRange("Company E-Mail", Rec."employee email");
+        // if not Employee.FindFirst() then
+        //     Error('No employee found with email %1', Rec."employee email");
         // Rec."Imprest Issue Doc. No" := '';
 
         // Insert the header — BC assigns No. from number series
@@ -222,7 +242,7 @@ page 50258 "Staff Adv Ret"
         Rec.Dim4 := PayHeader.Dim4;
         Rec."Global Dimension 1 Code" := PayHeader."Global Dimension 1 Code";
         Rec.Validate("Global Dimension 1 Code");
-       // Rec.Dim7 := PayHeader.Dim7;
+        // Rec.Dim7 := PayHeader.Dim7;
         Rec."Imprest Issue Date" := PayHeader.Date;
         Rec."Advance Narration" := PayHeader.Purpose;
         Rec."Responsibility Center" := PayHeader."Responsibility Center";

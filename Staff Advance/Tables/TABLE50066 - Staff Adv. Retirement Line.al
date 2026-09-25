@@ -48,7 +48,7 @@ table 50066 "Staff Advan Surrender Details"
                 end;
             end;
         }
-        field(3; "Account Name"; Text[50])
+        field(3; "Account Name"; Text[150])
         {
         }
         field(4; Amount; Decimal)

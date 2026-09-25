@@ -76,6 +76,10 @@ tableextension 50005 UsersetupExt extends "User Setup"
         {
             DataClassification = ToBeClassified;
         }
+        field(50015; "Edit AMT"; Boolean)
+        {
+
+        }
     }
 
     var
@@ -154,6 +158,10 @@ pageextension 50012 UserSetupExt extends "User Setup"
                 ApplicationArea = All;
             }
             field("ReOpen Service Quote"; Rec."ReOpen Service Quote")
+            {
+                ApplicationArea = All;
+            }
+            field("Edit AMT"; Rec."Edit AMT")
             {
                 ApplicationArea = All;
             }

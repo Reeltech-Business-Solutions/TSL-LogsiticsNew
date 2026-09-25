@@ -27,6 +27,10 @@ page 50257 StaffClaimLine
 
 
                 }
+                field(revenue_center; Rec."Shortcut Dimension 2 Code")
+                {
+
+                }
                 field(no; Rec."no")
                 {
                     Caption = 'No.';
@@ -75,20 +79,20 @@ page 50257 StaffClaimLine
     var
         StaffClaimHeader: Record "Staff Claims Header";
         StaffClaimLine: Record "Staff Claim Lines";
-       // StaffAdvanceLines: Record "Staff Claim Lines";
+        // StaffAdvanceLines: Record "Staff Claim Lines";
         RecPay: Record "Receipts and Payment Types";
     begin
         if IsDeepInsert then begin
             StaffClaimHeader.GetBySystemId(Rec."Header Id");
             Rec."No" := StaffClaimHeader."No.";
             StaffClaimLine.SetRange("No", Rec."No");
-            if StaffClaimLine.FindLast() then 
+            if StaffClaimLine.FindLast() then
                 Rec."Line No." := StaffClaimLine."Line No." + 10000
-                //  Rec."Requested Amount" := Rec.Amount;
-            else 
+            //  Rec."Requested Amount" := Rec.Amount;
+            else
                 Rec."Line No." := 10000;
-                // Rec."Requested Amount" := Rec.Amount;
-        
+            // Rec."Requested Amount" := Rec.Amount;
+
 
 
         end;

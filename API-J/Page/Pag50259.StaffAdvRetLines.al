@@ -13,7 +13,7 @@ page 50259 StaffAdvRetLines
     ODataKeyFields = SystemId;
     AutoSplitKey = true;
 
-    
+
     layout
     {
         area(Content)
@@ -29,10 +29,26 @@ page 50259 StaffAdvRetLines
                 {
 
                 }
-                field(no; Rec."Surrender Doc No.")
+                field(account_No; Rec."Account No:")
+                {
+
+                }
+                field(description; Rec."Account Name")
+                {
+
+                }
+                field(amount; Rec.Amount)
+                {
+
+                }
+                field(surrenderDocNo; Rec."Surrender Doc No.")
                 {
                     Caption = 'No.';
                     ApplicationArea = All;
+                }
+                field(AdvanceHolder; Rec."Advance Holder")
+                {
+
                 }
                 field(actual_amount_spent; Rec."Actual Spent")
                 {

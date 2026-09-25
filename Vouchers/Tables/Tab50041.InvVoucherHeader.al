@@ -63,7 +63,7 @@ table 50041 "Inv.Voucher Header"
                 Confirmed: Boolean;
 
             begin
-                TESTFIELD(Status, Status::Open);
+                // TESTFIELD(Status, Status::Open);
 
                 IF (xRec."Location Code" <> "Location Code") THEN BEGIN
                     IF HideValidationDialog OR

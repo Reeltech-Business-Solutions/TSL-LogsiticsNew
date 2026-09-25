@@ -10,6 +10,7 @@ page 50005 "Contract API TSL"
     EntitySetName = 'contracts';
     PageType = API;
     SourceTable = "Contract Agreement";
+    ODataKeyFields = SystemId;
 
     layout
     {
@@ -17,7 +18,7 @@ page 50005 "Contract API TSL"
         {
             repeater(General)
             {
-                field(systemId; Rec.SystemId)
+                field(SystemId; Rec.SystemId)
                 {
 
                 }
@@ -72,4 +73,5 @@ page 50005 "Contract API TSL"
             }
         }
     }
+
 }
