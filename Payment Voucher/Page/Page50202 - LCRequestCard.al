@@ -29,7 +29,7 @@ page 50202 "LC Request Card"
                 field(Date; rec.Date)
                 {
                     ApplicationArea = All;
-                    Editable = DateEditable;
+                    Editable = true;
                     Importance = Promoted;
                     trigger OnValidate()
                     begin
@@ -55,6 +55,29 @@ page 50202 "LC Request Card"
                         rec.TestField(Status, rec.Status::Open);
                     end;
                 }
+                // field("LC No."; Rec."LC No.")
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'LC No.';
+                //     trigger OnValidate()
+                //     var
+                //     PostCheck : Codeunit "Posting Check FP1";
+                //     BankName: Text[100];
+                //     "Account No.Editable": Boolean;
+                //     begin
+                //         BankName := PostCheck.GetBankName(Rec."LC No.")
+                //     end;
+                // }
+                // field("LC Name"; Rec."LC Name")
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'LC Name';
+                // }
+                // field("LC Request Issued";Rec."LC Request Issued")
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'LC Request Issued';
+                // }
                 field("Shortcut Dimension 2 Code"; rec."Shortcut Dimension 2 Code")
                 {
                     ApplicationArea = All;
@@ -902,6 +925,7 @@ page 50202 "LC Request Card"
         "Cheque TypeEditable" := true;
         "Payment Release DateEditable" := true;
         "Cheque No.Editable" := true;
+
     end;
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
@@ -1019,6 +1043,7 @@ page 50202 "LC Request Card"
         RespEditabl: Boolean;
         PaymentsHeader: Record "Payments Header";
         PaymentsLine: Record "Payments Line";
+        "Account No.Editable": Boolean;
 
 
 

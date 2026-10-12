@@ -1038,9 +1038,18 @@ table 50058 "Payments Line"
         {
             Editable = false;
         }
+
         field(56004; "Header Id"; Guid)
         {
             TableRelation = "Payments Header".SystemId;
+        }
+        field(56005; "Quantity"; Decimal)
+        {
+
+        }
+        field(56006; "Requested Amount"; Decimal)
+        {
+
         }
     }
 

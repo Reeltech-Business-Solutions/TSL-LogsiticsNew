@@ -471,6 +471,43 @@ table 50057 "Payments Header"
         field(50005; "PV Created By"; Code[20])
         {
         }
+        field(50006; "LC No."; Code[20])
+        {
+            TableRelation = "Bank Account"."No." where("Bank Acc. Posting Group" = const('WORKADV'));
+        }
+        field(50007; "LC Name"; Text[100])
+        {
+
+        }
+        field(50008; "LC Request Issued"; Code[20])
+        {
+
+        }
+        field(50009;
+        "Surrender Status";
+        Option)
+        {
+            OptionMembers = " ",Full,Partial;
+        }
+        field(50010; "Type of Advance"; Option)
+        {
+            OptionMembers = "Staff Advance","Trip Advance",LC;
+            OptionCaption = 'Staff Advance, Trip Advance,LC';
+
+            trigger OnValidate()
+            begin
+                // UpdateLines(FIELDNO("Type of Advance"));
+            end;
+        }
+        field(50011; "Account Type"; Enum "Account Type")
+        {
+            Caption = 'Account Type';
+            //OptionCaption = 'G/L Account,Customer,Vendor,Bank Account,Fixed Asset,IC Partner,Employee';
+            //OptionMembers = "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Employee;
+        }
+
+
+
 
     }
 

@@ -66,23 +66,18 @@ page 50263 "Requisition API"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        Rec.Status := Rec.Status::Released;
         Rec."Document Type" := Rec."Document Type"::Quote;
-        Rec."Purchase Type" := rec."Purchase Type"::"Local Requisition";
+        Rec."Purchase Type" := Rec."Purchase Type"::"Local Requisition";
 
 
     end;
-
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
-        Rec."Purchase Type" := Rec."Purchase Type"::"Local Requisition";
-        Rec."Buy-from Vendor No." := 'INT0001';
-        Rec."Pay-to Vendor No." := 'INT0001';
-        Rec.status := Rec.Status::Open;
+        Rec.Validate("Buy-from Vendor No.", 'INT0001');
+        Rec.Validate("Pay-to Vendor No.", 'INT0001');
+        exit(true);
     end;
-
-
 
 
 

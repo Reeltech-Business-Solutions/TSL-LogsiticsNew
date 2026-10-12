@@ -322,6 +322,7 @@ table 50065 "Staff Advanc Surrender Header"
                 PayHeader.Reset;
                 if not PayHeader.Get(Rec."Imprest Issue Doc. No") then exit;
                 /*Copy the details to the user interface*/
+
                 "Paying Bank Account" := PayHeader."Paying Bank Account";
                 Payee := PayHeader.Payee;
 
@@ -651,6 +652,132 @@ table 50065 "Staff Advanc Surrender Header"
             end;
             //OptionMembers = "Advance Retirement","Trip Retirement",LC;
         }
+        field(50011; "LC No."; Code[20])
+        {
+            TableRelation = "Bank Account"."No." where("Bank Acc. Posting Group" = const('WORKADV'));
+
+            trigger onValidate()
+            var
+                BankAcc: Record "Bank Account";
+            begin
+                if "LC No." = '' then begin
+                    "LC Name" := '';
+                    exit;
+                end;
+
+                BankAcc.Get("LC No.");
+                "LC Name" := BankAcc.Name;
+            end;
+
+        }
+        field(50012; "LC Name"; Text[100])
+        {
+            Editable = false;
+        }
+        field(50013; "LC Issue Doc No."; Code[20])
+        {
+            Caption = 'LC Issue Doc. No';
+
+            // TableRelation = "Staff Advance Header"."No." WHERE(Posted = CONST(true), "Account No." = FIELD("Account No."));
+            //TableRelation = "Staff Advance Header"."No." WHERE(Posted = filter(TRUE), "Account No." = field("Account No."), "Surrender Status" = filter(" "));
+            TableRelation = if ("Retirement Type" = filter("Trip Retirement")) "Payments Header" WHERE(Posted = filter(1), "LC No." = field("LC No."), "Surrender Status" = filter(" "), "Type of Advance" = filter("Trip Advance"), Status = filter(Approved))
+            else
+            if ("Retirement Type" = filter("Advance Retirement")) "Payments Header" WHERE(Status = filter(Posted), "LC No." = field("LC No."), "Surrender Status" = filter(" "), "Type of Advance" = filter("Staff Advance"))
+            else
+            if ("Retirement Type" = filter(LC)) "Payments Header" WHERE(Posted = filter(true), Payee = field(Payee), "Surrender Status" = filter(" "), "Account Type" = filter("Bank Account"));
+
+            trigger OnValidate()
+            begin
+                /*Copy the details from the payments header tableto the imprest surrender table to enable the user work on the same document*/
+                /*Retrieve the header details using the get statement*/
+                //delete any existing lines
+
+                PaymentLine.Reset;
+                PaymentLine.SetRange(PaymentLine."No.", "No.");
+                PaymentLine.DeleteAll;
+
+                PaymentHead.Reset;
+                if not PaymentHead.Get(Rec."LC Issue Doc No.") then exit;
+                /*Copy the details to the user interface*/
+                "Paying Bank Account" := PaymentHead."Paying Bank Account";
+                Payee := PaymentHead.Payee;
+
+
+                PaymentHead.CalcFields(PaymentHead."Total Net Amount");
+                Amount := PaymentHead."Total Net Amount";
+                //  "Amount Surrendered LCY" := PaymentHead."Total Net Amount LCY";
+                //Currencies
+                "Currency Factor" := PaymentHead."Currency Factor";
+                "Currency Code" := PaymentHead."Currency Code";
+                "Bank Code" := PaymentHead."Paying Bank Account";
+                //   Narration := PaymentHead.Purpose;
+                //   "employee email" := PaymentHead."employee email";
+
+                "Date Posted" := PaymentHead."Date Posted";
+                "Global Dimension 1 Code" := PaymentHead."Global Dimension 1 Code";
+                Validate("Global Dimension 1 Code");
+                "Shortcut Dimension 2 Code" := PaymentHead."Shortcut Dimension 2 Code";
+                VALIDATE("Shortcut Dimension 2 Code");
+                "Shortcut Dimension 3 Code" := PaymentHead."Shortcut Dimension 3 Code";
+                VALIDATE("Shortcut Dimension 3 Code");
+                Dim3 := PayHeader.Dim3;
+                "Shortcut Dimension 4 Code" := PaymentHead."Shortcut Dimension 4 Code";
+                VALIDATE("Shortcut Dimension 4 Code");
+                Dim4 := PaymentHead.Dim4;
+                "Imprest Issue Date" := PaymentHead.Date;
+                // "Advance Narration" := PaymentHead.Purpose;
+                "Responsibility Center" := PaymentHead."Responsibility Center";
+                //  "Group Head" := PaymentHead."Group Head";
+                //Yusuf Added
+                //Get Line No
+                if PaymentLine.FindLast then
+                    LineNo := PaymentLine."Line No." + 1
+                else
+                    LineNo := LineNo + 1;
+
+                /*Copy the detail lines from the imprest details table in the database*/
+                PaymentLine.Reset;
+                PaymentLine.SetRange("No.", "LC Issue Doc No.");
+                if PaymentLine.Find('-') then /*Copy the lines to the line table in the database*/
+                  begin
+                    repeat
+                        PaymentLine.Init;
+                        PaymentLine."Account No." := Rec."No.";
+                        //ImpSurrLine."Account No:" := '';//PayLine."Account No."  commented to allow the system not to pick control account from posted cash advance;
+                        //  ImpSurrLine.VALIDATE("Imprest Type", PaymentLine."Advance Type");
+                        PaymentLine."Account Type" := PaymentLine."Account Type";
+                        PaymentLine.Grouping := PaymentLine.Grouping;
+                        PaymentLine.Validate(PaymentLine."Account No.");
+                        PaymentLine."Account Name" := PaymentLine."Account Name";
+                        PaymentLine.Amount := PaymentLine.Amount;
+                        PaymentLine."Due Date" := PaymentLine."Due Date";
+                        //   PaymentLine."Advance Holder" := "Account No.";//PayLine."Advance Holder"
+                        //  ImpSurrLine."Actual Spent" := PaymentLine."Actual Spent";
+                        PaymentLine."Apply to" := PaymentLine."Apply to";
+                        PaymentLine."Apply to ID" := PaymentLine."Apply to ID";
+                        PaymentLine."Surrender Date" := PaymentLine."Surrender Date";
+                        PaymentLine.Surrendered := PaymentLine.Surrendered;
+                        //   ImpSurrLine."Cash Receipt No" := PaymentLine."M.R. No";
+                        //  ImpSurrLine."Date Issued" := PaymentLine."Date Issued";
+                        //  ImpSurrLine."Type of Surrender" := PaymentLine."Type of Surrender";
+                        //  ImpSurrLine."Dept. Vch. No." := PaymentLine."Dept. Vch. No.";
+                        PaymentLine."Currency Factor" := PaymentLine."Currency Factor";
+                        PaymentLine."Currency Code" := PaymentLine."Currency Code";
+                        //  ImpSurrLine."Imprest Req Amt LCY" := PaymentLine."Amount LCY";
+                        PaymentLine."Budgetary Control A/C" := PaymentLine."Budgetary Control A/C";
+                        //  PaymentLine."Shortcut Dimension 1 Code" := PaymentLine."Global Dimension 1 Code";
+                        PaymentLine."Shortcut Dimension 2 Code" := PaymentLine."Shortcut Dimension 2 Code";
+                        PaymentLine."Shortcut Dimension 3 Code" := PaymentLine."Shortcut Dimension 3 Code";
+                        PaymentLine."Shortcut Dimension 4 Code" := PaymentLine."Shortcut Dimension 4 Code";
+                        //  PaymentLine."Line on Original Document" := true;
+                        LineNo += 1;
+                        PaymentLine."Line No." := LineNo;
+                        PaymentLine.Insert;
+                    until PaymentLine.Next = 0;
+                end;
+
+            end;
+        }
     }
 
     keys
@@ -661,6 +788,7 @@ table 50065 "Staff Advanc Surrender Header"
         key(Key2; "Imprest Issue Doc. No")
         {
         }
+
         key(Key3; "Imprest Issue Date")
         {
         }
@@ -672,6 +800,10 @@ table 50065 "Staff Advanc Surrender Header"
         }
         key(Key6; "Global Dimension 2 Code")
         {
+        }
+        key(key7; "LC Issue Doc No.")
+        {
+
         }
     }
 
@@ -768,6 +900,8 @@ table 50065 "Staff Advanc Surrender Header"
         LineNo: Integer;
         UserSetup: Record "User Setup";
         AdvHeader: Record "Staff Advance Header";
+        PaymentHead: Record "Payments Header";
+        PaymentLine: Record "Payments Line";
 
     local procedure TestNoSeries(): Boolean
     begin

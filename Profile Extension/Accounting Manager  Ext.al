@@ -244,6 +244,12 @@ pageextension 50001 ExtendNavigationArea extends "Accounting Manager Role Center
                         RunObject = page "Posted LC Request List";
                         ApplicationArea = All;
                     }
+                    action("LC Retirement")
+                    {
+                        RunObject = page "LC Retirement List";
+                        ApplicationArea = All;
+                        Visible = false;
+                    }
                     action("Converted LC Request List")
                     {
                         RunObject = page "Converted LC Request List";

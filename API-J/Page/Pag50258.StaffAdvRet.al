@@ -63,6 +63,14 @@ page 50258 "Staff Adv Ret"
 
 
                 }
+                field("LCNo"; Rec."LC No.")
+                {
+                    ApplicationArea = All;
+                }
+                field("LCName"; Rec."LC Name")
+                {
+                    ApplicationArea = All;
+                }
 
 
                 field(payee; Rec.Payee)

@@ -14,6 +14,7 @@ page 50205 "LC Request Line"
                 field(Type; rec.Type)
                 {
                     ApplicationArea = All;
+                    Editable = locklines;
                     trigger OnValidate()
                     begin
                         checkstatus(Rec);
@@ -22,6 +23,7 @@ page 50205 "LC Request Line"
                 field("Account No."; rec."Account No.")
                 {
                     ApplicationArea = All;
+                    Editable = locklines;
                     trigger OnValidate()
                     begin
                         checkstatus(Rec);
@@ -30,6 +32,7 @@ page 50205 "LC Request Line"
                 field("Account Name"; rec."Account Name")
                 {
                     ApplicationArea = All;
+
                     Caption = 'Description';
                     Editable = true;
                     trigger OnValidate()
@@ -40,6 +43,7 @@ page 50205 "LC Request Line"
                 field("Global Dimension 1 Code"; rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = All;
+                    Editable = locklines;
                     trigger OnValidate()
                     begin
                         checkstatus(Rec);
@@ -48,6 +52,7 @@ page 50205 "LC Request Line"
                 field("Shortcut Dimension 2 Code"; rec."Shortcut Dimension 2 Code")
                 {
                     ApplicationArea = All;
+                    Editable = locklines;
                     trigger OnValidate()
                     begin
                         checkstatus(Rec);
@@ -56,6 +61,7 @@ page 50205 "LC Request Line"
                 field("Shortcut Dimension 3 Code"; rec."Shortcut Dimension 3 Code")
                 {
                     ApplicationArea = All;
+                    Editable = locklines;
                     Visible = false;
                     trigger OnValidate()
                     begin
@@ -65,6 +71,7 @@ page 50205 "LC Request Line"
                 field("Shortcut Dimension 4 Code"; rec."Shortcut Dimension 4 Code")
                 {
                     ApplicationArea = All;
+                    Editable = locklines;
                     Visible = false;
                     trigger OnValidate()
                     begin
@@ -74,6 +81,7 @@ page 50205 "LC Request Line"
                 field("Invoice No."; rec."Invoice No.")
                 {
                     ApplicationArea = All;
+                    Editable = locklines;
                     Visible = false;
                     trigger OnValidate()
                     begin
@@ -85,7 +93,7 @@ page 50205 "LC Request Line"
                     ApplicationArea = All;
                     trigger OnValidate()
                     begin
-                        checkstatus(Rec);
+                        // checkstatus(Rec);
                         //check if the payment reference is for farmer purchase
                         if Rec."Payment Reference" = Rec."Payment Reference"::"Farmer Purchase" then begin
                             if Rec.Amount <> xRec.Amount then begin
@@ -294,7 +302,24 @@ page 50205 "LC Request Line"
                         Rec.VALIDATE("Net Amount");
                     end;
                 }
+                field(Quantity; Rec.Quantity)
+                {
+                    ApplicationArea = All;
+                    trigger OnValidate()
+                    begin
+                        checkstatus(Rec);
+                    end;
+                }
                 field("Due Date"; rec."Due Date")
+                {
+                    ApplicationArea = All;
+                    Editable = locklines;
+                    trigger OnValidate()
+                    begin
+                        checkstatus(Rec);
+                    end;
+                }
+                field("Requested Amount"; Rec."Requested Amount")
                 {
                     ApplicationArea = All;
                     trigger OnValidate()
@@ -309,6 +334,21 @@ page 50205 "LC Request Line"
     actions
     {
     }
+
+    trigger OnAfterGetRecord()
+    begin
+        locklines := lockAdvLine();
+    end;
+
+    procedure lockAdvLine(): Boolean
+    begin
+        //  Editno := true;
+
+        if Rec.Status <> Rec.Status::Open
+        then
+            exit(true) else
+            exit(false);
+    end;
 
     procedure checkstatus(var PYLine: Record "Payments Line")
     var
@@ -337,6 +377,7 @@ page 50205 "LC Request Line"
         VATToPay: Decimal;
         PInvLine: Record "Purch. Inv. Line";
         VATBase: Decimal;
+        locklines: boolean;
 
 }
 

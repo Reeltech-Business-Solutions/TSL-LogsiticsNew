@@ -42,6 +42,27 @@ page 50074 "Staff Advance Retirement"
                     Editable = false;
                     ApplicationArea = All;
                 }
+                field("LC No."; Rec."LC No.")
+                {
+                    ApplicationArea = All;
+                    Caption = 'LC No.';
+                    Visible = false;
+                    trigger OnValidate()
+                    var
+                        PostCheck: Codeunit "Posting Check FP1";
+                        BankName: Text[100];
+                        "Account No.Editable": Boolean;
+                    begin
+                        BankName := PostCheck.GetBankName(Rec."LC No.")
+                    end;
+                }
+                field("LC Name"; Rec."LC Name")
+                {
+                    ApplicationArea = All;
+                    Caption = 'LC Name';
+                    Visible = false;
+                    Editable = false;
+                }
                 field("Imprest Issue Doc. No"; Rec."Imprest Issue Doc. No")
                 {
                     Caption = 'Advance Issue Doc. No.';

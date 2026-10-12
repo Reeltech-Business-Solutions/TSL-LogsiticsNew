@@ -67,5 +67,6 @@ page 50010 "LC Request API"
         Rec."PV Created" := false;
         Rec."Payment Type" := Rec."Payment Type"::LC;
         Rec.Status := Rec.Status::Approved;
+        Rec."Account Type" := Rec."Account Type"::"Bank Account";
     end;
 }

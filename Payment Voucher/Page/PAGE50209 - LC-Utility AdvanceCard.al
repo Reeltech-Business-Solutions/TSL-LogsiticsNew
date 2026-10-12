@@ -98,21 +98,21 @@ page 50209 "LC-Utility Advance Card"
                 }
                 field("Pay Mode"; rec."Pay Mode")
                 {
-                    Editable = false;
+                    // Editable = false;
                     // ValuesAllowed = " ", Cash, Cheque, EFT;
                     Visible = true;
                     ApplicationArea = all;
                 }
                 field("Paying Bank Account"; rec."Paying Bank Account")
                 {
-                    Editable = false;
+                    //   Editable = false;
                     Visible = true;
                     ApplicationArea = all;
                 }
                 field("Bank Name"; rec."Bank Name")
                 {
                     Caption = 'Paying Bank Name';
-                    Editable = false;
+                    //  Editable = false;
                     Visible = true;
                     ApplicationArea = all;
                 }
@@ -129,7 +129,7 @@ page 50209 "LC-Utility Advance Card"
                 }
                 field(Status; rec.Status)
                 {
-                    Editable = false;
+                    // Editable = false;
                     ApplicationArea = all;
                     trigger OnValidate()
                     begin

@@ -50,10 +50,34 @@ page 50091 "Approved Purchase Req."
     trigger OnOpenPage()
     begin
         Rec.SetFilter("Purchase Type", '%1|%2', Rec."Purchase Type"::"Local Requisition", Rec."Purchase Type"::"Foreign Requisition");
+        // Rec.setRange("Document Type", Rec."Document Type"::quote);
+        // Rec.SetRange("Buy-from Vendor No.", 'INT0001');
+        // Rec.setRange("Created By", 'TSL APPLICATION');
+        // if rec.findset() then
+        //     repeat
+        //         if Rec."Created By" = 'TSL APPLICATION' then begin
+        //             Rec.Status := Rec.status::Released;
+        //             Rec.Modify(true);
+        //         end;
+        //     until rec.next() = 0;
         // repeat
         //     Validate(Status);
         //     Validate("Purchase Type");
         // until rec.Next() = 0;
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        // Rec.setRange("Document Type", Rec."Document Type"::quote);
+        // Rec.SetRange("Buy-from Vendor No.", 'INT0001');
+        // Rec.setRange("Created By", 'TSL APPLICATION');
+        // if rec.findset() then
+        //     repeat
+        //         if Rec."Created By" = 'TSL APPLICATION' then begin
+        //             Rec.Status := Rec.status::Released;
+        //             Rec.Modify(true);
+        //         end;
+        //     until rec.next() = 0;
     end;
 
 }

@@ -322,7 +322,7 @@ tableextension 50019 PurchHeaderExt extends "Purchase Header"
         {
 
         }
-        
+
     }
 
     trigger OnInsert()
@@ -339,6 +339,8 @@ tableextension 50019 PurchHeaderExt extends "Purchase Header"
     // begin
 
     // end;
+
+
 
     procedure UpdatePurchaseLines(FieldRef: Integer)
     var

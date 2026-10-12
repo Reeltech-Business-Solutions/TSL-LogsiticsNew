@@ -71,6 +71,15 @@ codeunit 50006 "Posting Check FP1"
         exit(Name);
     end;
 
+    procedure GetBankName(No: Code[20]) Name: Text[100]
+    var
+        BankAcc: Record "Bank Account";
+    begin
+        Name := '';
+        if BankAcc.Get(No) then
+            exit(Name);
+    end;
+
 
     procedure GetDimensionName(var "Code": Code[20]; DimNo: Integer) Name: Text[60]
     var

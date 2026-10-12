@@ -1313,6 +1313,8 @@ page 50046 "Purchase Local Req"
         CalculateCurrentShippingAndPayToOption;
         if BuyFromContact.Get(Rec."Buy-from Contact No.") then;
         if PayToContact.Get(Rec."Pay-to Contact No.") then;
+
+
     end;
 
     trigger OnDeleteRecord(): Boolean
@@ -1320,6 +1322,9 @@ page 50046 "Purchase Local Req"
         CurrPage.SaveRecord;
         exit(Rec.ConfirmDeletion);
     end;
+
+
+
 
     trigger OnInit()
     begin
@@ -1359,6 +1364,8 @@ page 50046 "Purchase Local Req"
         ActivateFields;
         SetDocNoVisible;
         //ShowVendorDetails;
+
+
 
         if Rec.status = Rec.status::Released then
             ShowDetails := true

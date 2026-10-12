@@ -459,7 +459,7 @@ table 50063 "Staff Advance Header"
             else
             if ("Account Type" = FILTER(Employee), "Type of Advance" = filter("Trip Advance")) Employee."No." Where(Status = filter(Active), "Account Type" = filter(Drivers))
             else
-            if ("Account Type" = FILTER(Employee), "Type of Advance" = filter(LC)) Employee."No." Where(Status = filter(Active), "Account Type" = filter("Staff Debtors"))
+            if ("Account Type" = FILTER(Employee), "Type of Advance" = filter(LC)) Employee."No." Where(Status = filter(Active), "Account Type" = filter("Staff Advance"))
             else
             if ("Account Type" = FILTER(Employee), "Type of Advance" = filter("Staff Advance")) Employee."No." Where(Status = filter(Active), "Account Type" = filter("Staff Advance"));
 

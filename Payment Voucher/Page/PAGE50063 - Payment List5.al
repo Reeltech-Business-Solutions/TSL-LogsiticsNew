@@ -8,8 +8,8 @@ page 50196 "Payment List"
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Category6_caption,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     SourceTable = "Payments Header";
-    SourceTableView = WHERE("Payment Type" = CONST(Normal),
-                            Posted = CONST(false));
+    //  SourceTableView = WHERE("Payment Type" = CONST(Normal),
+    //   Posted = CONST(false));
     UsageCategory = Lists;
     AdditionalSearchTerms = 'Payment List';
     layout
